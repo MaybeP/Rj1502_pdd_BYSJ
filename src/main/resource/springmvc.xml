@@ -11,6 +11,7 @@
     <!--配置注解驱动-->
     <context:annotation-config/>
 
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 
         <property name="prefix" value="/"/>
