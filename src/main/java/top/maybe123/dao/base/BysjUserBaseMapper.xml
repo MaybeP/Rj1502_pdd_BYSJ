@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.maybe123.dao.base.BysjUserBaseMapper">
+
+
+    <insert id="insertBysjUser"  useGeneratedKeys="true" keyProperty="Id">
+        INSERT INTO `bysj_user`
+        (
+        <trim suffixOverrides=",">
+                    <if test="Id!=null">
+                        `Id`,
+                    </if>
+                    <if test="u_name!=null">
+                        `u_name`,
+                    </if>
+                    <if test="u_password!=null">
+                        `u_password`,
+                    </if>
+                    <if test="u_address!=null">
+                        `u_address`,
+                    </if>
+                    <if test="u_sex!=null">
+                        `u_sex`,
+                    </if>
+                    <if test="u_email!=null">
+                        `u_email`,
+                    </if>
+                    <if test="u_birthday!=null">
+                        `u_birthday`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="Id!=null">
+                    #{Id},
+                </if>
+                <if test="u_name!=null">
+                    #{u_name},
+                </if>
+                <if test="u_password!=null">
+                    #{u_password},
+                </if>
+                <if test="u_address!=null">
+                    #{u_address},
+                </if>
+                <if test="u_sex!=null">
+                    #{u_sex},
+                </if>
+                <if test="u_email!=null">
+                    #{u_email},
+                </if>
+                <if test="u_birthday!=null">
+                    #{u_birthday},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateBysjUser">
+        UPDATE `bysj_user`
+        SET
+        <trim suffixOverrides=",">
+            <if test="u_name != null and u_name!=''">
+                `u_name` = #{u_name},
+            </if>
+            <if test="u_password != null and u_password!=''">
+                `u_password` = #{u_password},
+            </if>
+            <if test="u_address != null and u_address!=''">
+                `u_address` = #{u_address},
+            </if>
+            <if test="u_sex != null and u_sex!=''">
+                `u_sex` = #{u_sex},
+            </if>
+            <if test="u_email != null and u_email!=''">
+                `u_email` = #{u_email},
+            </if>
+            <if test="u_birthday != null and u_birthday!=''">
+                `u_birthday` = #{u_birthday},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `Id` = #{Id} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `bysj_user`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.u_name != null and set.u_name!=''">
+            `u_name` = #{set.u_name},
+        </if>
+        <if test="set.u_password != null and set.u_password!=''">
+            `u_password` = #{set.u_password},
+        </if>
+        <if test="set.u_address != null and set.u_address!=''">
+            `u_address` = #{set.u_address},
+        </if>
+        <if test="set.u_sex != null and set.u_sex!=''">
+            `u_sex` = #{set.u_sex},
+        </if>
+        <if test="set.u_email != null and set.u_email!=''">
+            `u_email` = #{set.u_email},
+        </if>
+        <if test="set.u_birthday != null and set.u_birthday!=''">
+            `u_birthday` = #{set.u_birthday},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.IdList != null">
+                    `Id` in
+                    <foreach collection="where.IdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.IdSt !=null">
+                `Id` >= #{where.IdSt} and
+            </if>
+            <if test="where.IdEd!=null">
+                `Id` &lt;= #{where.IdEd} and
+            </if>
+                <if test="where.u_nameList != null">
+                    `u_name` in
+                    <foreach collection="where.u_nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyU_name!=null and where.fuzzyU_name.size()>0">
+                (
+                <foreach collection="where.fuzzyU_name"  separator="or" item="item">
+                    `U_name` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyU_name!=null and where.rightFuzzyU_name.size()>0">
+                (
+                <foreach collection="where.rightFuzzyU_name"  separator="or" item="item">
+                    `U_name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.u_passwordList != null">
+                    `u_password` in
+                    <foreach collection="where.u_passwordList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyU_password!=null and where.fuzzyU_password.size()>0">
+                (
+                <foreach collection="where.fuzzyU_password"  separator="or" item="item">
+                    `U_password` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyU_password!=null and where.rightFuzzyU_password.size()>0">
+                (
+                <foreach collection="where.rightFuzzyU_password"  separator="or" item="item">
+                    `U_password` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.u_addressList != null">
+                    `u_address` in
+                    <foreach collection="where.u_addressList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyU_address!=null and where.fuzzyU_address.size()>0">
+                (
+                <foreach collection="where.fuzzyU_address"  separator="or" item="item">
+                    `U_address` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyU_address!=null and where.rightFuzzyU_address.size()>0">
+                (
+                <foreach collection="where.rightFuzzyU_address"  separator="or" item="item">
+                    `U_address` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.u_sexList != null">
+                    `u_sex` in
+                    <foreach collection="where.u_sexList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyU_sex!=null and where.fuzzyU_sex.size()>0">
+                (
+                <foreach collection="where.fuzzyU_sex"  separator="or" item="item">
+                    `U_sex` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyU_sex!=null and where.rightFuzzyU_sex.size()>0">
+                (
+                <foreach collection="where.rightFuzzyU_sex"  separator="or" item="item">
+                    `U_sex` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.u_emailList != null">
+                    `u_email` in
+                    <foreach collection="where.u_emailList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyU_email!=null and where.fuzzyU_email.size()>0">
+                (
+                <foreach collection="where.fuzzyU_email"  separator="or" item="item">
+                    `U_email` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyU_email!=null and where.rightFuzzyU_email.size()>0">
+                (
+                <foreach collection="where.rightFuzzyU_email"  separator="or" item="item">
+                    `U_email` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.u_birthdayList != null">
+                    `u_birthday` in
+                    <foreach collection="where.u_birthdayList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyU_birthday!=null and where.fuzzyU_birthday.size()>0">
+                (
+                <foreach collection="where.fuzzyU_birthday"  separator="or" item="item">
+                    `U_birthday` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyU_birthday!=null and where.rightFuzzyU_birthday.size()>0">
+                (
+                <foreach collection="where.rightFuzzyU_birthday"  separator="or" item="item">
+                    `U_birthday` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="top.maybe123.dao.BysjUser" id="BysjUserMap">
+        <result property="Id" column="Id"/>
+        <result property="u_name" column="u_name"/>
+        <result property="u_password" column="u_password"/>
+        <result property="u_address" column="u_address"/>
+        <result property="u_sex" column="u_sex"/>
+        <result property="u_email" column="u_email"/>
+        <result property="u_birthday" column="u_birthday"/>
+    </resultMap>
+
+
+    <select id="queryBysjUser" resultMap="BysjUserMap">
+        select
+        <include refid="baseResult"></include>
+        from  `bysj_user`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="Id != null">
+                `Id` = #{Id} and
+            </if>
+            <if test="u_name != null and u_name!=''">
+                `u_name` = #{u_name} and
+            </if>
+            <if test="u_password != null and u_password!=''">
+                `u_password` = #{u_password} and
+            </if>
+            <if test="u_address != null and u_address!=''">
+                `u_address` = #{u_address} and
+            </if>
+            <if test="u_sex != null and u_sex!=''">
+                `u_sex` = #{u_sex} and
+            </if>
+            <if test="u_email != null and u_email!=''">
+                `u_email` = #{u_email} and
+            </if>
+            <if test="u_birthday != null and u_birthday!=''">
+                `u_birthday` = #{u_birthday} and
+            </if>
+            <if test = "(_parameter instanceof packageModel.BysjUser$QueryBuilder) == true">
+                <if test="IdList != null">
+                    `Id` in
+                    <foreach collection="IdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="IdSt !=null">
+                    `Id` >= #{IdSt} and
+                </if>
+                <if test="IdEd!=null">
+                    `Id` &lt;= #{IdEd} and
+                </if>
+                <if test="u_nameList != null">
+                    `u_name` in
+                    <foreach collection="u_nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyU_name!=null and fuzzyU_name.size()>0">
+                    (
+                    <foreach collection="fuzzyU_name"  separator="or" item="item">
+                        `U_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyU_name!=null and rightFuzzyU_name.size()>0">
+                    (
+                    <foreach collection="rightFuzzyU_name"  separator="or" item="item">
+                        `U_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="u_passwordList != null">
+                    `u_password` in
+                    <foreach collection="u_passwordList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyU_password!=null and fuzzyU_password.size()>0">
+                    (
+                    <foreach collection="fuzzyU_password"  separator="or" item="item">
+                        `U_password` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyU_password!=null and rightFuzzyU_password.size()>0">
+                    (
+                    <foreach collection="rightFuzzyU_password"  separator="or" item="item">
+                        `U_password` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="u_addressList != null">
+                    `u_address` in
+                    <foreach collection="u_addressList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyU_address!=null and fuzzyU_address.size()>0">
+                    (
+                    <foreach collection="fuzzyU_address"  separator="or" item="item">
+                        `U_address` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyU_address!=null and rightFuzzyU_address.size()>0">
+                    (
+                    <foreach collection="rightFuzzyU_address"  separator="or" item="item">
+                        `U_address` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="u_sexList != null">
+                    `u_sex` in
+                    <foreach collection="u_sexList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyU_sex!=null and fuzzyU_sex.size()>0">
+                    (
+                    <foreach collection="fuzzyU_sex"  separator="or" item="item">
+                        `U_sex` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyU_sex!=null and rightFuzzyU_sex.size()>0">
+                    (
+                    <foreach collection="rightFuzzyU_sex"  separator="or" item="item">
+                        `U_sex` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="u_emailList != null">
+                    `u_email` in
+                    <foreach collection="u_emailList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyU_email!=null and fuzzyU_email.size()>0">
+                    (
+                    <foreach collection="fuzzyU_email"  separator="or" item="item">
+                        `U_email` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyU_email!=null and rightFuzzyU_email.size()>0">
+                    (
+                    <foreach collection="rightFuzzyU_email"  separator="or" item="item">
+                        `U_email` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="u_birthdayList != null">
+                    `u_birthday` in
+                    <foreach collection="u_birthdayList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyU_birthday!=null and fuzzyU_birthday.size()>0">
+                    (
+                    <foreach collection="fuzzyU_birthday"  separator="or" item="item">
+                        `U_birthday` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyU_birthday!=null and rightFuzzyU_birthday.size()>0">
+                    (
+                    <foreach collection="rightFuzzyU_birthday"  separator="or" item="item">
+                        `U_birthday` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryBysjUserLimit1" resultMap="BysjUserMap">
+        select
+        <include refid="baseResult"></include>
+        from  `bysj_user`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="Id != null">
+                `Id` = #{Id} and
+            </if>
+            <if test="u_name != null and u_name!=''">
+                `u_name` = #{u_name} and
+            </if>
+            <if test="u_password != null and u_password!=''">
+                `u_password` = #{u_password} and
+            </if>
+            <if test="u_address != null and u_address!=''">
+                `u_address` = #{u_address} and
+            </if>
+            <if test="u_sex != null and u_sex!=''">
+                `u_sex` = #{u_sex} and
+            </if>
+            <if test="u_email != null and u_email!=''">
+                `u_email` = #{u_email} and
+            </if>
+            <if test="u_birthday != null and u_birthday!=''">
+                `u_birthday` = #{u_birthday} and
+            </if>
+            <if test = "(_parameter instanceof packageModel.BysjUser$QueryBuilder) == true">
+                    <if test="IdList != null">
+                        `Id` in
+                        <foreach collection="IdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="IdSt !=null">
+                    `Id` >= #{IdSt} and
+                </if>
+                <if test="IdEd!=null">
+                    `Id` &lt;= #{IdEd} and
+                </if>
+                    <if test="u_nameList != null">
+                        `u_name` in
+                        <foreach collection="u_nameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyU_name!=null and fuzzyU_name.size()>0">
+                    (
+                    <foreach collection="fuzzyU_name"  separator="or" item="item">
+                        `U_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyU_name!=null and rightFuzzyU_name.size()>0">
+                    (
+                    <foreach collection="rightFuzzyU_name"  separator="or" item="item">
+                        `U_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="u_passwordList != null">
+                        `u_password` in
+                        <foreach collection="u_passwordList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyU_password!=null and fuzzyU_password.size()>0">
+                    (
+                    <foreach collection="fuzzyU_password"  separator="or" item="item">
+                        `U_password` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyU_password!=null and rightFuzzyU_password.size()>0">
+                    (
+                    <foreach collection="rightFuzzyU_password"  separator="or" item="item">
+                        `U_password` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="u_addressList != null">
+                        `u_address` in
+                        <foreach collection="u_addressList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyU_address!=null and fuzzyU_address.size()>0">
+                    (
+                    <foreach collection="fuzzyU_address"  separator="or" item="item">
+                        `U_address` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyU_address!=null and rightFuzzyU_address.size()>0">
+                    (
+                    <foreach collection="rightFuzzyU_address"  separator="or" item="item">
+                        `U_address` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="u_sexList != null">
+                        `u_sex` in
+                        <foreach collection="u_sexList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyU_sex!=null and fuzzyU_sex.size()>0">
+                    (
+                    <foreach collection="fuzzyU_sex"  separator="or" item="item">
+                        `U_sex` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyU_sex!=null and rightFuzzyU_sex.size()>0">
+                    (
+                    <foreach collection="rightFuzzyU_sex"  separator="or" item="item">
+                        `U_sex` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="u_emailList != null">
+                        `u_email` in
+                        <foreach collection="u_emailList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyU_email!=null and fuzzyU_email.size()>0">
+                    (
+                    <foreach collection="fuzzyU_email"  separator="or" item="item">
+                        `U_email` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyU_email!=null and rightFuzzyU_email.size()>0">
+                    (
+                    <foreach collection="rightFuzzyU_email"  separator="or" item="item">
+                        `U_email` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="u_birthdayList != null">
+                        `u_birthday` in
+                        <foreach collection="u_birthdayList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyU_birthday!=null and fuzzyU_birthday.size()>0">
+                    (
+                    <foreach collection="fuzzyU_birthday"  separator="or" item="item">
+                        `U_birthday` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyU_birthday!=null and rightFuzzyU_birthday.size()>0">
+                    (
+                    <foreach collection="rightFuzzyU_birthday"  separator="or" item="item">
+                        `U_birthday` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `Id`,
+        `u_name`,
+        `u_password`,
+        `u_address`,
+        `u_sex`,
+        `u_email`,
+        `u_birthday`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof packageModel.BysjUser$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.Id==true">
+                        `Id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.u_name==true">
+                        `u_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.u_password==true">
+                        `u_password`,
+                    </if>
+                    <if test="fetchFields.fetchFields.u_address==true">
+                        `u_address`,
+                    </if>
+                    <if test="fetchFields.fetchFields.u_sex==true">
+                        `u_sex`,
+                    </if>
+                    <if test="fetchFields.fetchFields.u_email==true">
+                        `u_email`,
+                    </if>
+                    <if test="fetchFields.fetchFields.u_birthday==true">
+                        `u_birthday`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.Id==null">
+                        `Id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.u_name==null">
+                        `u_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.u_password==null">
+                        `u_password`,
+                    </if>
+                    <if test="fetchFields.excludeFields.u_address==null">
+                        `u_address`,
+                    </if>
+                    <if test="fetchFields.excludeFields.u_sex==null">
+                        `u_sex`,
+                    </if>
+                    <if test="fetchFields.excludeFields.u_email==null">
+                        `u_email`,
+                    </if>
+                    <if test="fetchFields.excludeFields.u_birthday==null">
+                        `u_birthday`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof packageModel.BysjUser$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>
