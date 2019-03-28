@@ -1,6 +1,8 @@
 package top.maybe123.controller;
 
 
+import jdk.nashorn.internal.parser.JSONParser;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +23,9 @@ public class ImageBaidu {
     @Autowired
     AuthorServicce authorServicce;
     @RequestMapping(value = "/getAuthor.action")
-    public  @ResponseBody List<BysjAuthor> getAuthor(String name){
-        return authorServicce.getAuthorByname(name);
+    public  @ResponseBody List<BysjAuthor> getAuthor(@Param("name") String name){
+
+        return   authorServicce.getAuthorByname(name);
     }
 
 }

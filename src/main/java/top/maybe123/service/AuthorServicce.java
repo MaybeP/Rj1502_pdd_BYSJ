@@ -14,11 +14,11 @@ import java.util.List;
 @Service
 public class AuthorServicce  {
 @Autowired
- BysjAuthorMapper bysjAuthorMapper;
+BysjAuthorMapper bysjAuthorMapper;
 public List<BysjAuthor> getAuthorByname(String name){
 
 
     BysjAuthor bysjAuthor=new BysjAuthor();
-    return bysjAuthorMapper.queryBysjAuthor(bysjAuthor);
+return bysjAuthorMapper.queryBysjAuthor(bysjAuthor);
 }
 }
