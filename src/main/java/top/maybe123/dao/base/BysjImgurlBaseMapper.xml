@@ -11,11 +11,11 @@
                     <if test="Id!=null">
                         `Id`,
                     </if>
-                    <if test="prosetitle!=null">
-                        `prosetitle`,
-                    </if>
                     <if test="proseurl!=null">
                         `proseurl`,
+                    </if>
+                    <if test="imgjson!=null">
+                        `imgjson`,
                     </if>
         </trim>
         )
@@ -25,11 +25,11 @@
                 <if test="Id!=null">
                     #{Id},
                 </if>
-                <if test="prosetitle!=null">
-                    #{prosetitle},
-                </if>
                 <if test="proseurl!=null">
                     #{proseurl},
+                </if>
+                <if test="imgjson!=null">
+                    #{imgjson},
                 </if>
         </trim>
         )
@@ -42,11 +42,11 @@
         UPDATE `bysj_imgurl`
         SET
         <trim suffixOverrides=",">
-            <if test="prosetitle != null and prosetitle!=''">
-                `prosetitle` = #{prosetitle},
-            </if>
             <if test="proseurl != null and proseurl!=''">
                 `proseurl` = #{proseurl},
+            </if>
+            <if test="imgjson != null and imgjson!=''">
+                `imgjson` = #{imgjson},
             </if>
         </trim>
         WHERE
@@ -59,11 +59,11 @@
         UPDATE `bysj_imgurl`
         SET
         <trim suffixOverrides=",">
-        <if test="set.prosetitle != null and set.prosetitle!=''">
-            `prosetitle` = #{set.prosetitle},
-        </if>
         <if test="set.proseurl != null and set.proseurl!=''">
             `proseurl` = #{set.proseurl},
+        </if>
+        <if test="set.imgjson != null and set.imgjson!=''">
+            `imgjson` = #{set.imgjson},
         </if>
         </trim>
         <trim prefix="where" suffixOverrides="and | or">
@@ -78,26 +78,6 @@
             </if>
             <if test="where.IdEd!=null">
                 `Id` &lt;= #{where.IdEd} and
-            </if>
-                <if test="where.prosetitleList != null">
-                    `prosetitle` in
-                    <foreach collection="where.prosetitleList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-            <if test ="where.fuzzyProsetitle!=null and where.fuzzyProsetitle.size()>0">
-                (
-                <foreach collection="where.fuzzyProsetitle"  separator="or" item="item">
-                    `Prosetitle` like concat('%',#{item},'%')
-                </foreach>
-                ) and
-            </if>
-            <if test ="where.rightFuzzyProsetitle!=null and where.rightFuzzyProsetitle.size()>0">
-                (
-                <foreach collection="where.rightFuzzyProsetitle"  separator="or" item="item">
-                    `Prosetitle` like concat(#{item},'%')
-                </foreach>
-                ) and
             </if>
                 <if test="where.proseurlList != null">
                     `proseurl` in
@@ -119,14 +99,34 @@
                 </foreach>
                 ) and
             </if>
+                <if test="where.imgjsonList != null">
+                    `imgjson` in
+                    <foreach collection="where.imgjsonList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyImgjson!=null and where.fuzzyImgjson.size()>0">
+                (
+                <foreach collection="where.fuzzyImgjson"  separator="or" item="item">
+                    `Imgjson` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyImgjson!=null and where.rightFuzzyImgjson.size()>0">
+                (
+                <foreach collection="where.rightFuzzyImgjson"  separator="or" item="item">
+                    `Imgjson` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
         </trim>
     </update>
 
 
     <resultMap type="top.maybe123.pojo.BysjImgurl" id="BysjImgurlMap">
         <result property="Id" column="Id"/>
-        <result property="prosetitle" column="prosetitle"/>
         <result property="proseurl" column="proseurl"/>
+        <result property="imgjson" column="imgjson"/>
     </resultMap>
 
 
@@ -138,11 +138,11 @@
             <if test="Id != null">
                 `Id` = #{Id} and
             </if>
-            <if test="prosetitle != null and prosetitle!=''">
-                `prosetitle` = #{prosetitle} and
-            </if>
             <if test="proseurl != null and proseurl!=''">
                 `proseurl` = #{proseurl} and
+            </if>
+            <if test="imgjson != null and imgjson!=''">
+                `imgjson` = #{imgjson} and
             </if>
             <if test = "(_parameter instanceof top.maybe123.pojo.BysjImgurl$QueryBuilder) == true">
                 <if test="IdList != null">
@@ -156,26 +156,6 @@
                 </if>
                 <if test="IdEd!=null">
                     `Id` &lt;= #{IdEd} and
-                </if>
-                <if test="prosetitleList != null">
-                    `prosetitle` in
-                    <foreach collection="prosetitleList" close=")" open="(" separator="," item="item">
-                        #{item}
-                    </foreach> and
-                </if>
-                <if test ="fuzzyProsetitle!=null and fuzzyProsetitle.size()>0">
-                    (
-                    <foreach collection="fuzzyProsetitle"  separator="or" item="item">
-                        `Prosetitle` like concat('%',#{item},'%')
-                    </foreach>
-                    ) and
-                </if>
-                <if test ="rightFuzzyProsetitle!=null and rightFuzzyProsetitle.size()>0">
-                    (
-                    <foreach collection="rightFuzzyProsetitle"  separator="or" item="item">
-                        `Prosetitle` like concat(#{item},'%')
-                    </foreach>
-                    ) and
                 </if>
                 <if test="proseurlList != null">
                     `proseurl` in
@@ -197,6 +177,26 @@
                     </foreach>
                     ) and
                 </if>
+                <if test="imgjsonList != null">
+                    `imgjson` in
+                    <foreach collection="imgjsonList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyImgjson!=null and fuzzyImgjson.size()>0">
+                    (
+                    <foreach collection="fuzzyImgjson"  separator="or" item="item">
+                        `Imgjson` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyImgjson!=null and rightFuzzyImgjson.size()>0">
+                    (
+                    <foreach collection="rightFuzzyImgjson"  separator="or" item="item">
+                        `Imgjson` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
             </if>
         </trim>
     </select>
@@ -209,11 +209,11 @@
             <if test="Id != null">
                 `Id` = #{Id} and
             </if>
-            <if test="prosetitle != null and prosetitle!=''">
-                `prosetitle` = #{prosetitle} and
-            </if>
             <if test="proseurl != null and proseurl!=''">
                 `proseurl` = #{proseurl} and
+            </if>
+            <if test="imgjson != null and imgjson!=''">
+                `imgjson` = #{imgjson} and
             </if>
             <if test = "(_parameter instanceof top.maybe123.pojo.BysjImgurl$QueryBuilder) == true">
                     <if test="IdList != null">
@@ -227,26 +227,6 @@
                 </if>
                 <if test="IdEd!=null">
                     `Id` &lt;= #{IdEd} and
-                </if>
-                    <if test="prosetitleList != null">
-                        `prosetitle` in
-                        <foreach collection="prosetitleList" close=")" open="(" separator="," item="item">
-                            #{item}
-                        </foreach> and
-                    </if>
-                <if test ="fuzzyProsetitle!=null and fuzzyProsetitle.size()>0">
-                    (
-                    <foreach collection="fuzzyProsetitle"  separator="or" item="item">
-                        `Prosetitle` like concat('%',#{item},'%')
-                    </foreach>
-                    ) and
-                </if>
-                <if test ="rightFuzzyProsetitle!=null and rightFuzzyProsetitle.size()>0">
-                    (
-                    <foreach collection="rightFuzzyProsetitle"  separator="or" item="item">
-                        `Prosetitle` like concat(#{item},'%')
-                    </foreach>
-                    ) and
                 </if>
                     <if test="proseurlList != null">
                         `proseurl` in
@@ -268,6 +248,26 @@
                     </foreach>
                     ) and
                 </if>
+                    <if test="imgjsonList != null">
+                        `imgjson` in
+                        <foreach collection="imgjsonList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyImgjson!=null and fuzzyImgjson.size()>0">
+                    (
+                    <foreach collection="fuzzyImgjson"  separator="or" item="item">
+                        `Imgjson` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyImgjson!=null and rightFuzzyImgjson.size()>0">
+                    (
+                    <foreach collection="rightFuzzyImgjson"  separator="or" item="item">
+                        `Imgjson` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
             </if>
         </trim>
         limit 1
@@ -276,8 +276,8 @@
     <sql id="allResult">
         <trim suffixOverrides=",">
         `Id`,
-        `prosetitle`,
         `proseurl`,
+        `imgjson`,
         </trim>
     </sql>
 
@@ -301,22 +301,22 @@
                     <if test="fetchFields.fetchFields.Id==true">
                         `Id`,
                     </if>
-                    <if test="fetchFields.fetchFields.prosetitle==true">
-                        `prosetitle`,
-                    </if>
                     <if test="fetchFields.fetchFields.proseurl==true">
                         `proseurl`,
+                    </if>
+                    <if test="fetchFields.fetchFields.imgjson==true">
+                        `imgjson`,
                     </if>
                     </if>
                     <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
                     <if test="fetchFields.excludeFields.Id==null">
                         `Id`,
                     </if>
-                    <if test="fetchFields.excludeFields.prosetitle==null">
-                        `prosetitle`,
-                    </if>
                     <if test="fetchFields.excludeFields.proseurl==null">
                         `proseurl`,
+                    </if>
+                    <if test="fetchFields.excludeFields.imgjson==null">
+                        `imgjson`,
                     </if>
                     </if>
                     <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">

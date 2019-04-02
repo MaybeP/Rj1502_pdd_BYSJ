@@ -20,6 +20,7 @@ public class FaceInfo {
      * https://ai.baidu.com/file/470B3ACCA3FE43788B5A963BF0B625F3
      * 下载
      */
+    static String  accessToken = Accesstoken.getAuth();
     public static String detect(byte[] imgData) {
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/face/v1/detect";
@@ -30,7 +31,7 @@ public class FaceInfo {
             String param = "max_face_num=" + 5 + "&face_fields=" + "age,beauty,faceshape,gender,glasses" + "&image=" + imgParam;
 
             // 注意这里仅为了简化编码每一次请求都去获取access_token，线上环境access_token有过期时间， 客户端可自行缓存，过期后重新获取。
-            String accessToken = Accesstoken.getAuth();
+            
 
             String result = HttpUtil.post(url, accessToken, param);
             System.out.println(result);

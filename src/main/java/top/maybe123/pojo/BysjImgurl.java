@@ -10,7 +10,7 @@ import java.util.List;
 */
 public class BysjImgurl implements Serializable {
 
-    private static final long serialVersionUID = 1553738303357L;
+    private static final long serialVersionUID = 1554112769769L;
 
 
     /**
@@ -21,35 +21,35 @@ public class BysjImgurl implements Serializable {
     private Integer Id;
 
     /**
-    * 
-    * isNullAble:0,defaultVal:
-    */
-    private String prosetitle;
-
-    /**
-    * 
+    * 作品图片url
     * isNullAble:0,defaultVal:
     */
     private String proseurl;
+
+    /**
+    * 图片json数据
+    * isNullAble:0
+    */
+    private String imgjson;
 
 
     public void setId(Integer Id){this.Id = Id;}
 
     public Integer getId(){return this.Id;}
 
-    public void setProsetitle(String prosetitle){this.prosetitle = prosetitle;}
-
-    public String getProsetitle(){return this.prosetitle;}
-
     public void setProseurl(String proseurl){this.proseurl = proseurl;}
 
     public String getProseurl(){return this.proseurl;}
+
+    public void setImgjson(String imgjson){this.imgjson = imgjson;}
+
+    public String getImgjson(){return this.imgjson;}
     @Override
     public String toString() {
         return "BysjImgurl{" +
                 "Id='" + Id + '\'' +
-                "prosetitle='" + prosetitle + '\'' +
                 "proseurl='" + proseurl + '\'' +
+                "imgjson='" + imgjson + '\'' +
             '}';
     }
 
@@ -110,18 +110,6 @@ public class BysjImgurl implements Serializable {
 
         public Integer getIdEd(){return this.IdEd;}
 
-        private List<String> prosetitleList;
-
-        public List<String> getProsetitleList(){return this.prosetitleList;}
-
-
-        private List<String> fuzzyProsetitle;
-
-        public List<String> getFuzzyProsetitle(){return this.fuzzyProsetitle;}
-
-        private List<String> rightFuzzyProsetitle;
-
-        public List<String> getRightFuzzyProsetitle(){return this.rightFuzzyProsetitle;}
         private List<String> proseurlList;
 
         public List<String> getProseurlList(){return this.proseurlList;}
@@ -134,6 +122,18 @@ public class BysjImgurl implements Serializable {
         private List<String> rightFuzzyProseurl;
 
         public List<String> getRightFuzzyProseurl(){return this.rightFuzzyProseurl;}
+        private List<String> imgjsonList;
+
+        public List<String> getImgjsonList(){return this.imgjsonList;}
+
+
+        private List<String> fuzzyImgjson;
+
+        public List<String> getFuzzyImgjson(){return this.fuzzyImgjson;}
+
+        private List<String> rightFuzzyImgjson;
+
+        public List<String> getRightFuzzyImgjson(){return this.rightFuzzyImgjson;}
         private QueryBuilder (){
             this.fetchFields = new HashMap<>();
         }
@@ -179,51 +179,6 @@ public class BysjImgurl implements Serializable {
             return this;
         }
 
-        public QueryBuilder fuzzyProsetitle (List<String> fuzzyProsetitle){
-            this.fuzzyProsetitle = fuzzyProsetitle;
-            return this;
-        }
-
-        public QueryBuilder fuzzyProsetitle (String ... fuzzyProsetitle){
-            this.fuzzyProsetitle = solveNullList(fuzzyProsetitle);
-            return this;
-        }
-
-        public QueryBuilder rightFuzzyProsetitle (List<String> rightFuzzyProsetitle){
-            this.rightFuzzyProsetitle = rightFuzzyProsetitle;
-            return this;
-        }
-
-        public QueryBuilder rightFuzzyProsetitle (String ... rightFuzzyProsetitle){
-            this.rightFuzzyProsetitle = solveNullList(rightFuzzyProsetitle);
-            return this;
-        }
-
-        public QueryBuilder prosetitle(String prosetitle){
-            setProsetitle(prosetitle);
-            return this;
-        }
-
-        public QueryBuilder prosetitleList(String ... prosetitle){
-            this.prosetitleList = solveNullList(prosetitle);
-            return this;
-        }
-
-        public QueryBuilder prosetitleList(List<String> prosetitle){
-            this.prosetitleList = prosetitle;
-            return this;
-        }
-
-        public QueryBuilder fetchProsetitle(){
-            setFetchFields("fetchFields","prosetitle");
-            return this;
-        }
-
-        public QueryBuilder excludeProsetitle(){
-            setFetchFields("excludeFields","prosetitle");
-            return this;
-        }
-
         public QueryBuilder fuzzyProseurl (List<String> fuzzyProseurl){
             this.fuzzyProseurl = fuzzyProseurl;
             return this;
@@ -266,6 +221,51 @@ public class BysjImgurl implements Serializable {
 
         public QueryBuilder excludeProseurl(){
             setFetchFields("excludeFields","proseurl");
+            return this;
+        }
+
+        public QueryBuilder fuzzyImgjson (List<String> fuzzyImgjson){
+            this.fuzzyImgjson = fuzzyImgjson;
+            return this;
+        }
+
+        public QueryBuilder fuzzyImgjson (String ... fuzzyImgjson){
+            this.fuzzyImgjson = solveNullList(fuzzyImgjson);
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyImgjson (List<String> rightFuzzyImgjson){
+            this.rightFuzzyImgjson = rightFuzzyImgjson;
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyImgjson (String ... rightFuzzyImgjson){
+            this.rightFuzzyImgjson = solveNullList(rightFuzzyImgjson);
+            return this;
+        }
+
+        public QueryBuilder imgjson(String imgjson){
+            setImgjson(imgjson);
+            return this;
+        }
+
+        public QueryBuilder imgjsonList(String ... imgjson){
+            this.imgjsonList = solveNullList(imgjson);
+            return this;
+        }
+
+        public QueryBuilder imgjsonList(List<String> imgjson){
+            this.imgjsonList = imgjson;
+            return this;
+        }
+
+        public QueryBuilder fetchImgjson(){
+            setFetchFields("fetchFields","imgjson");
+            return this;
+        }
+
+        public QueryBuilder excludeImgjson(){
+            setFetchFields("excludeFields","imgjson");
             return this;
         }
         private <T>List<T> solveNullList(T ... objs){
@@ -323,18 +323,6 @@ public class BysjImgurl implements Serializable {
 
         public Integer getIdEd(){return this.IdEd;}
 
-        private List<String> prosetitleList;
-
-        public List<String> getProsetitleList(){return this.prosetitleList;}
-
-
-        private List<String> fuzzyProsetitle;
-
-        public List<String> getFuzzyProsetitle(){return this.fuzzyProsetitle;}
-
-        private List<String> rightFuzzyProsetitle;
-
-        public List<String> getRightFuzzyProsetitle(){return this.rightFuzzyProsetitle;}
         private List<String> proseurlList;
 
         public List<String> getProseurlList(){return this.proseurlList;}
@@ -347,6 +335,18 @@ public class BysjImgurl implements Serializable {
         private List<String> rightFuzzyProseurl;
 
         public List<String> getRightFuzzyProseurl(){return this.rightFuzzyProseurl;}
+        private List<String> imgjsonList;
+
+        public List<String> getImgjsonList(){return this.imgjsonList;}
+
+
+        private List<String> fuzzyImgjson;
+
+        public List<String> getFuzzyImgjson(){return this.fuzzyImgjson;}
+
+        private List<String> rightFuzzyImgjson;
+
+        public List<String> getRightFuzzyImgjson(){return this.rightFuzzyImgjson;}
 
         public ConditionBuilder IdBetWeen(Integer IdSt,Integer IdEd){
             this.IdSt = IdSt;
@@ -371,36 +371,6 @@ public class BysjImgurl implements Serializable {
 
         public ConditionBuilder IdList(List<Integer> Id){
             this.IdList = Id;
-            return this;
-        }
-
-        public ConditionBuilder fuzzyProsetitle (List<String> fuzzyProsetitle){
-            this.fuzzyProsetitle = fuzzyProsetitle;
-            return this;
-        }
-
-        public ConditionBuilder fuzzyProsetitle (String ... fuzzyProsetitle){
-            this.fuzzyProsetitle = solveNullList(fuzzyProsetitle);
-            return this;
-        }
-
-        public ConditionBuilder rightFuzzyProsetitle (List<String> rightFuzzyProsetitle){
-            this.rightFuzzyProsetitle = rightFuzzyProsetitle;
-            return this;
-        }
-
-        public ConditionBuilder rightFuzzyProsetitle (String ... rightFuzzyProsetitle){
-            this.rightFuzzyProsetitle = solveNullList(rightFuzzyProsetitle);
-            return this;
-        }
-
-        public ConditionBuilder prosetitleList(String ... prosetitle){
-            this.prosetitleList = solveNullList(prosetitle);
-            return this;
-        }
-
-        public ConditionBuilder prosetitleList(List<String> prosetitle){
-            this.prosetitleList = prosetitle;
             return this;
         }
 
@@ -434,6 +404,36 @@ public class BysjImgurl implements Serializable {
             return this;
         }
 
+        public ConditionBuilder fuzzyImgjson (List<String> fuzzyImgjson){
+            this.fuzzyImgjson = fuzzyImgjson;
+            return this;
+        }
+
+        public ConditionBuilder fuzzyImgjson (String ... fuzzyImgjson){
+            this.fuzzyImgjson = solveNullList(fuzzyImgjson);
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyImgjson (List<String> rightFuzzyImgjson){
+            this.rightFuzzyImgjson = rightFuzzyImgjson;
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyImgjson (String ... rightFuzzyImgjson){
+            this.rightFuzzyImgjson = solveNullList(rightFuzzyImgjson);
+            return this;
+        }
+
+        public ConditionBuilder imgjsonList(String ... imgjson){
+            this.imgjsonList = solveNullList(imgjson);
+            return this;
+        }
+
+        public ConditionBuilder imgjsonList(List<String> imgjson){
+            this.imgjsonList = imgjson;
+            return this;
+        }
+
         private <T>List<T> solveNullList(T ... objs){
             if (objs != null){
             List<T> list = new ArrayList<>();
@@ -462,12 +462,12 @@ public class BysjImgurl implements Serializable {
             this.obj.setId(Id);
             return this;
         }
-        public Builder prosetitle(String prosetitle){
-            this.obj.setProsetitle(prosetitle);
-            return this;
-        }
         public Builder proseurl(String proseurl){
             this.obj.setProseurl(proseurl);
+            return this;
+        }
+        public Builder imgjson(String imgjson){
+            this.obj.setImgjson(imgjson);
             return this;
         }
         public BysjImgurl build(){return obj;}

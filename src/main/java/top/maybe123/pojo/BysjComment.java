@@ -10,7 +10,7 @@ import java.util.List;
 */
 public class BysjComment implements Serializable {
 
-    private static final long serialVersionUID = 1553738300174L;
+    private static final long serialVersionUID = 1554022601740L;
 
 
     /**
@@ -44,6 +44,12 @@ public class BysjComment implements Serializable {
     */
     private Integer comment_times;
 
+    /**
+    * 评论文章题目
+    * isNullAble:0,defaultVal:
+    */
+    private String comment_title;
+
 
     public void setId(Integer Id){this.Id = Id;}
 
@@ -64,6 +70,10 @@ public class BysjComment implements Serializable {
     public void setComment_times(Integer comment_times){this.comment_times = comment_times;}
 
     public Integer getComment_times(){return this.comment_times;}
+
+    public void setComment_title(String comment_title){this.comment_title = comment_title;}
+
+    public String getComment_title(){return this.comment_title;}
     @Override
     public String toString() {
         return "BysjComment{" +
@@ -72,6 +82,7 @@ public class BysjComment implements Serializable {
                 "comment_src='" + comment_src + '\'' +
                 "comment_content='" + comment_content + '\'' +
                 "comment_times='" + comment_times + '\'' +
+                "comment_title='" + comment_title + '\'' +
             '}';
     }
 
@@ -180,6 +191,18 @@ public class BysjComment implements Serializable {
 
         public Integer getComment_timesEd(){return this.comment_timesEd;}
 
+        private List<String> comment_titleList;
+
+        public List<String> getComment_titleList(){return this.comment_titleList;}
+
+
+        private List<String> fuzzyComment_title;
+
+        public List<String> getFuzzyComment_title(){return this.fuzzyComment_title;}
+
+        private List<String> rightFuzzyComment_title;
+
+        public List<String> getRightFuzzyComment_title(){return this.rightFuzzyComment_title;}
         private QueryBuilder (){
             this.fetchFields = new HashMap<>();
         }
@@ -400,6 +423,51 @@ public class BysjComment implements Serializable {
             setFetchFields("excludeFields","comment_times");
             return this;
         }
+
+        public QueryBuilder fuzzyComment_title (List<String> fuzzyComment_title){
+            this.fuzzyComment_title = fuzzyComment_title;
+            return this;
+        }
+
+        public QueryBuilder fuzzyComment_title (String ... fuzzyComment_title){
+            this.fuzzyComment_title = solveNullList(fuzzyComment_title);
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyComment_title (List<String> rightFuzzyComment_title){
+            this.rightFuzzyComment_title = rightFuzzyComment_title;
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyComment_title (String ... rightFuzzyComment_title){
+            this.rightFuzzyComment_title = solveNullList(rightFuzzyComment_title);
+            return this;
+        }
+
+        public QueryBuilder comment_title(String comment_title){
+            setComment_title(comment_title);
+            return this;
+        }
+
+        public QueryBuilder comment_titleList(String ... comment_title){
+            this.comment_titleList = solveNullList(comment_title);
+            return this;
+        }
+
+        public QueryBuilder comment_titleList(List<String> comment_title){
+            this.comment_titleList = comment_title;
+            return this;
+        }
+
+        public QueryBuilder fetchComment_title(){
+            setFetchFields("fetchFields","comment_title");
+            return this;
+        }
+
+        public QueryBuilder excludeComment_title(){
+            setFetchFields("excludeFields","comment_title");
+            return this;
+        }
         private <T>List<T> solveNullList(T ... objs){
             if (objs != null){
             List<T> list = new ArrayList<>();
@@ -503,6 +571,18 @@ public class BysjComment implements Serializable {
 
         public Integer getComment_timesEd(){return this.comment_timesEd;}
 
+        private List<String> comment_titleList;
+
+        public List<String> getComment_titleList(){return this.comment_titleList;}
+
+
+        private List<String> fuzzyComment_title;
+
+        public List<String> getFuzzyComment_title(){return this.fuzzyComment_title;}
+
+        private List<String> rightFuzzyComment_title;
+
+        public List<String> getRightFuzzyComment_title(){return this.rightFuzzyComment_title;}
 
         public ConditionBuilder IdBetWeen(Integer IdSt,Integer IdEd){
             this.IdSt = IdSt;
@@ -646,6 +726,36 @@ public class BysjComment implements Serializable {
             return this;
         }
 
+        public ConditionBuilder fuzzyComment_title (List<String> fuzzyComment_title){
+            this.fuzzyComment_title = fuzzyComment_title;
+            return this;
+        }
+
+        public ConditionBuilder fuzzyComment_title (String ... fuzzyComment_title){
+            this.fuzzyComment_title = solveNullList(fuzzyComment_title);
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyComment_title (List<String> rightFuzzyComment_title){
+            this.rightFuzzyComment_title = rightFuzzyComment_title;
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyComment_title (String ... rightFuzzyComment_title){
+            this.rightFuzzyComment_title = solveNullList(rightFuzzyComment_title);
+            return this;
+        }
+
+        public ConditionBuilder comment_titleList(String ... comment_title){
+            this.comment_titleList = solveNullList(comment_title);
+            return this;
+        }
+
+        public ConditionBuilder comment_titleList(List<String> comment_title){
+            this.comment_titleList = comment_title;
+            return this;
+        }
+
         private <T>List<T> solveNullList(T ... objs){
             if (objs != null){
             List<T> list = new ArrayList<>();
@@ -688,6 +798,10 @@ public class BysjComment implements Serializable {
         }
         public Builder comment_times(Integer comment_times){
             this.obj.setComment_times(comment_times);
+            return this;
+        }
+        public Builder comment_title(String comment_title){
+            this.obj.setComment_title(comment_title);
             return this;
         }
         public BysjComment build(){return obj;}

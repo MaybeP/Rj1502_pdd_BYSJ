@@ -10,7 +10,7 @@ import java.util.List;
 */
 public class BysjProse implements Serializable {
 
-    private static final long serialVersionUID = 1553738310699L;
+    private static final long serialVersionUID = 1554022609710L;
 
 
     /**
@@ -62,6 +62,12 @@ public class BysjProse implements Serializable {
     */
     private String prose_classify;
 
+    /**
+    * 文章配图
+    * isNullAble:1
+    */
+    private String prose_img;
+
 
     public void setId(Integer Id){this.Id = Id;}
 
@@ -94,6 +100,10 @@ public class BysjProse implements Serializable {
     public void setProse_classify(String prose_classify){this.prose_classify = prose_classify;}
 
     public String getProse_classify(){return this.prose_classify;}
+
+    public void setProse_img(String prose_img){this.prose_img = prose_img;}
+
+    public String getProse_img(){return this.prose_img;}
     @Override
     public String toString() {
         return "BysjProse{" +
@@ -105,6 +115,7 @@ public class BysjProse implements Serializable {
                 "prose_times='" + prose_times + '\'' +
                 "prose_content='" + prose_content + '\'' +
                 "prose_classify='" + prose_classify + '\'' +
+                "prose_img='" + prose_img + '\'' +
             '}';
     }
 
@@ -249,6 +260,18 @@ public class BysjProse implements Serializable {
         private List<String> rightFuzzyProse_classify;
 
         public List<String> getRightFuzzyProse_classify(){return this.rightFuzzyProse_classify;}
+        private List<String> prose_imgList;
+
+        public List<String> getProse_imgList(){return this.prose_imgList;}
+
+
+        private List<String> fuzzyProse_img;
+
+        public List<String> getFuzzyProse_img(){return this.fuzzyProse_img;}
+
+        private List<String> rightFuzzyProse_img;
+
+        public List<String> getRightFuzzyProse_img(){return this.rightFuzzyProse_img;}
         private QueryBuilder (){
             this.fetchFields = new HashMap<>();
         }
@@ -604,6 +627,51 @@ public class BysjProse implements Serializable {
             setFetchFields("excludeFields","prose_classify");
             return this;
         }
+
+        public QueryBuilder fuzzyProse_img (List<String> fuzzyProse_img){
+            this.fuzzyProse_img = fuzzyProse_img;
+            return this;
+        }
+
+        public QueryBuilder fuzzyProse_img (String ... fuzzyProse_img){
+            this.fuzzyProse_img = solveNullList(fuzzyProse_img);
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyProse_img (List<String> rightFuzzyProse_img){
+            this.rightFuzzyProse_img = rightFuzzyProse_img;
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyProse_img (String ... rightFuzzyProse_img){
+            this.rightFuzzyProse_img = solveNullList(rightFuzzyProse_img);
+            return this;
+        }
+
+        public QueryBuilder prose_img(String prose_img){
+            setProse_img(prose_img);
+            return this;
+        }
+
+        public QueryBuilder prose_imgList(String ... prose_img){
+            this.prose_imgList = solveNullList(prose_img);
+            return this;
+        }
+
+        public QueryBuilder prose_imgList(List<String> prose_img){
+            this.prose_imgList = prose_img;
+            return this;
+        }
+
+        public QueryBuilder fetchProse_img(){
+            setFetchFields("fetchFields","prose_img");
+            return this;
+        }
+
+        public QueryBuilder excludeProse_img(){
+            setFetchFields("excludeFields","prose_img");
+            return this;
+        }
         private <T>List<T> solveNullList(T ... objs){
             if (objs != null){
             List<T> list = new ArrayList<>();
@@ -743,6 +811,18 @@ public class BysjProse implements Serializable {
         private List<String> rightFuzzyProse_classify;
 
         public List<String> getRightFuzzyProse_classify(){return this.rightFuzzyProse_classify;}
+        private List<String> prose_imgList;
+
+        public List<String> getProse_imgList(){return this.prose_imgList;}
+
+
+        private List<String> fuzzyProse_img;
+
+        public List<String> getFuzzyProse_img(){return this.fuzzyProse_img;}
+
+        private List<String> rightFuzzyProse_img;
+
+        public List<String> getRightFuzzyProse_img(){return this.rightFuzzyProse_img;}
 
         public ConditionBuilder IdBetWeen(Integer IdSt,Integer IdEd){
             this.IdSt = IdSt;
@@ -976,6 +1056,36 @@ public class BysjProse implements Serializable {
             return this;
         }
 
+        public ConditionBuilder fuzzyProse_img (List<String> fuzzyProse_img){
+            this.fuzzyProse_img = fuzzyProse_img;
+            return this;
+        }
+
+        public ConditionBuilder fuzzyProse_img (String ... fuzzyProse_img){
+            this.fuzzyProse_img = solveNullList(fuzzyProse_img);
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyProse_img (List<String> rightFuzzyProse_img){
+            this.rightFuzzyProse_img = rightFuzzyProse_img;
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyProse_img (String ... rightFuzzyProse_img){
+            this.rightFuzzyProse_img = solveNullList(rightFuzzyProse_img);
+            return this;
+        }
+
+        public ConditionBuilder prose_imgList(String ... prose_img){
+            this.prose_imgList = solveNullList(prose_img);
+            return this;
+        }
+
+        public ConditionBuilder prose_imgList(List<String> prose_img){
+            this.prose_imgList = prose_img;
+            return this;
+        }
+
         private <T>List<T> solveNullList(T ... objs){
             if (objs != null){
             List<T> list = new ArrayList<>();
@@ -1030,6 +1140,10 @@ public class BysjProse implements Serializable {
         }
         public Builder prose_classify(String prose_classify){
             this.obj.setProse_classify(prose_classify);
+            return this;
+        }
+        public Builder prose_img(String prose_img){
+            this.obj.setProse_img(prose_img);
             return this;
         }
         public BysjProse build(){return obj;}

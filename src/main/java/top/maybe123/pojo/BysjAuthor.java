@@ -10,7 +10,7 @@ import java.util.List;
 */
 public class BysjAuthor implements Serializable {
 
-    private static final long serialVersionUID = 1553738256636L;
+    private static final long serialVersionUID = 1554022594719L;
 
 
     /**
@@ -50,6 +50,12 @@ public class BysjAuthor implements Serializable {
     */
     private String au_say;
 
+    /**
+    * 作者头像
+    * isNullAble:0,defaultVal:
+    */
+    private String au_imgsrc;
+
 
     public void setId(Integer Id){this.Id = Id;}
 
@@ -74,6 +80,10 @@ public class BysjAuthor implements Serializable {
     public void setAu_say(String au_say){this.au_say = au_say;}
 
     public String getAu_say(){return this.au_say;}
+
+    public void setAu_imgsrc(String au_imgsrc){this.au_imgsrc = au_imgsrc;}
+
+    public String getAu_imgsrc(){return this.au_imgsrc;}
     @Override
     public String toString() {
         return "BysjAuthor{" +
@@ -83,6 +93,7 @@ public class BysjAuthor implements Serializable {
                 "au_job='" + au_job + '\'' +
                 "au_famous='" + au_famous + '\'' +
                 "au_say='" + au_say + '\'' +
+                "au_imgsrc='" + au_imgsrc + '\'' +
             '}';
     }
 
@@ -203,6 +214,18 @@ public class BysjAuthor implements Serializable {
         private List<String> rightFuzzyAu_say;
 
         public List<String> getRightFuzzyAu_say(){return this.rightFuzzyAu_say;}
+        private List<String> au_imgsrcList;
+
+        public List<String> getAu_imgsrcList(){return this.au_imgsrcList;}
+
+
+        private List<String> fuzzyAu_imgsrc;
+
+        public List<String> getFuzzyAu_imgsrc(){return this.fuzzyAu_imgsrc;}
+
+        private List<String> rightFuzzyAu_imgsrc;
+
+        public List<String> getRightFuzzyAu_imgsrc(){return this.rightFuzzyAu_imgsrc;}
         private QueryBuilder (){
             this.fetchFields = new HashMap<>();
         }
@@ -472,6 +495,51 @@ public class BysjAuthor implements Serializable {
             setFetchFields("excludeFields","au_say");
             return this;
         }
+
+        public QueryBuilder fuzzyAu_imgsrc (List<String> fuzzyAu_imgsrc){
+            this.fuzzyAu_imgsrc = fuzzyAu_imgsrc;
+            return this;
+        }
+
+        public QueryBuilder fuzzyAu_imgsrc (String ... fuzzyAu_imgsrc){
+            this.fuzzyAu_imgsrc = solveNullList(fuzzyAu_imgsrc);
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyAu_imgsrc (List<String> rightFuzzyAu_imgsrc){
+            this.rightFuzzyAu_imgsrc = rightFuzzyAu_imgsrc;
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyAu_imgsrc (String ... rightFuzzyAu_imgsrc){
+            this.rightFuzzyAu_imgsrc = solveNullList(rightFuzzyAu_imgsrc);
+            return this;
+        }
+
+        public QueryBuilder au_imgsrc(String au_imgsrc){
+            setAu_imgsrc(au_imgsrc);
+            return this;
+        }
+
+        public QueryBuilder au_imgsrcList(String ... au_imgsrc){
+            this.au_imgsrcList = solveNullList(au_imgsrc);
+            return this;
+        }
+
+        public QueryBuilder au_imgsrcList(List<String> au_imgsrc){
+            this.au_imgsrcList = au_imgsrc;
+            return this;
+        }
+
+        public QueryBuilder fetchAu_imgsrc(){
+            setFetchFields("fetchFields","au_imgsrc");
+            return this;
+        }
+
+        public QueryBuilder excludeAu_imgsrc(){
+            setFetchFields("excludeFields","au_imgsrc");
+            return this;
+        }
         private <T>List<T> solveNullList(T ... objs){
             if (objs != null){
             List<T> list = new ArrayList<>();
@@ -587,6 +655,18 @@ public class BysjAuthor implements Serializable {
         private List<String> rightFuzzyAu_say;
 
         public List<String> getRightFuzzyAu_say(){return this.rightFuzzyAu_say;}
+        private List<String> au_imgsrcList;
+
+        public List<String> getAu_imgsrcList(){return this.au_imgsrcList;}
+
+
+        private List<String> fuzzyAu_imgsrc;
+
+        public List<String> getFuzzyAu_imgsrc(){return this.fuzzyAu_imgsrc;}
+
+        private List<String> rightFuzzyAu_imgsrc;
+
+        public List<String> getRightFuzzyAu_imgsrc(){return this.rightFuzzyAu_imgsrc;}
 
         public ConditionBuilder IdBetWeen(Integer IdSt,Integer IdEd){
             this.IdSt = IdSt;
@@ -764,6 +844,36 @@ public class BysjAuthor implements Serializable {
             return this;
         }
 
+        public ConditionBuilder fuzzyAu_imgsrc (List<String> fuzzyAu_imgsrc){
+            this.fuzzyAu_imgsrc = fuzzyAu_imgsrc;
+            return this;
+        }
+
+        public ConditionBuilder fuzzyAu_imgsrc (String ... fuzzyAu_imgsrc){
+            this.fuzzyAu_imgsrc = solveNullList(fuzzyAu_imgsrc);
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyAu_imgsrc (List<String> rightFuzzyAu_imgsrc){
+            this.rightFuzzyAu_imgsrc = rightFuzzyAu_imgsrc;
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyAu_imgsrc (String ... rightFuzzyAu_imgsrc){
+            this.rightFuzzyAu_imgsrc = solveNullList(rightFuzzyAu_imgsrc);
+            return this;
+        }
+
+        public ConditionBuilder au_imgsrcList(String ... au_imgsrc){
+            this.au_imgsrcList = solveNullList(au_imgsrc);
+            return this;
+        }
+
+        public ConditionBuilder au_imgsrcList(List<String> au_imgsrc){
+            this.au_imgsrcList = au_imgsrc;
+            return this;
+        }
+
         private <T>List<T> solveNullList(T ... objs){
             if (objs != null){
             List<T> list = new ArrayList<>();
@@ -810,6 +920,10 @@ public class BysjAuthor implements Serializable {
         }
         public Builder au_say(String au_say){
             this.obj.setAu_say(au_say);
+            return this;
+        }
+        public Builder au_imgsrc(String au_imgsrc){
+            this.obj.setAu_imgsrc(au_imgsrc);
             return this;
         }
         public BysjAuthor build(){return obj;}
