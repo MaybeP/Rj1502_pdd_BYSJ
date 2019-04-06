@@ -9,7 +9,10 @@ import top.maybe123.pojo.BysjProse;
 import top.maybe123.service.ProseService;
 
 import java.util.List;
-
+/*
+*@author pdd
+* 散文处理相关
+ */
 @Controller
 public class ProseController {
 

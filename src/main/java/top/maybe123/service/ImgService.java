@@ -11,6 +11,10 @@ import top.maybe123.tool.TextInfo;
 
 import java.io.IOException;
 
+/*
+*@author pdd
+* 处理关于图片上传以及识别
+ */
 @Service
 public class ImgService {
    @Autowired
