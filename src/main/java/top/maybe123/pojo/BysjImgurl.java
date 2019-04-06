@@ -10,7 +10,7 @@ import java.util.List;
 */
 public class BysjImgurl implements Serializable {
 
-    private static final long serialVersionUID = 1554112769769L;
+    private static final long serialVersionUID = 1554194521342L;
 
 
     /**
@@ -28,7 +28,7 @@ public class BysjImgurl implements Serializable {
 
     /**
     * 图片json数据
-    * isNullAble:0
+    * isNullAble:1
     */
     private String imgjson;
 

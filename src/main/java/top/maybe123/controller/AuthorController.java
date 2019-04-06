@@ -19,7 +19,7 @@ import java.util.List;
 public class AuthorController {
 	@Autowired
 	AuthorServicce authorServicce;
-	
+	//得到一个作者信息
 	@RequestMapping(value = "/getAuthorOne.action")
 	public  @ResponseBody BysjAuthor getAuthor(@Param("id") Integer id,@Param("name") String name){
 		BysjAuthor bysjAuthor;
@@ -31,7 +31,7 @@ public class AuthorController {
 		}
 		return bysjAuthor;
 	}
-	
+	//获取所有作者信息
 	@RequestMapping(value = "/getAuthorAll.action")
 	public @ResponseBody
 	List<BysjAuthor> getAuthorAll(@Param("name")String name){

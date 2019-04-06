@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import top.maybe123.pojo.BysjAuthor;
+import top.maybe123.pojo.BysjImgurl;
 import top.maybe123.service.AuthorServicce;
 import top.maybe123.service.ImgService;
-import top.maybe123.tool.ImageOutPut;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,9 +31,9 @@ public class ImageBaidu {
     ImgService imgService;
     
   
-
+//上传图片文字识别的接口
     @RequestMapping(value = "/uptext.action",method= RequestMethod.POST)
-    public void getFace(@RequestParam("imag") MultipartFile file,@RequestParam("imag_name")String url
+    public void uptext(@RequestParam("imag") MultipartFile file,@RequestParam("imag_name")String url
             , HttpServletRequest request
     , HttpServletResponse response) throws IOException {
         response.setHeader("Access-Control-Allow-Origin","*");
@@ -44,7 +43,7 @@ public class ImageBaidu {
         response.setHeader("Access-Control-Allow-Headers","x-requested-with,Content-Type");
         imgService.addtextImg(file,url);
     }
-
+//上传人脸识别的接口
     @RequestMapping(value = "upface.action",method= RequestMethod.POST)
     public void insertImag(@RequestParam("imag") MultipartFile file,
             @RequestParam("imag_name")String url, HttpServletRequest request
@@ -55,6 +54,13 @@ public class ImageBaidu {
         response.setHeader("Access-Control-Max-Age","3600");
         response.setHeader("Access-Control-Allow-Headers","x-requested-with,Content-Type");
         imgService.addfaceImg(file,url);
+    }
+    
+    //得到图片json
+    @RequestMapping("getImageJson.action")
+    public @ResponseBody
+    BysjImgurl getImageJson(@Param("url") String url){
+    return imgService.getJson(url);
     }
 
 

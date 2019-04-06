@@ -30,7 +30,7 @@ public class ImgService {
       }
       
       bysj.setProseurl("www.maybe123.top:888/image/face/"+param);
-      Thread th=new Thread(new ImageOutPut(file,param));
+      Thread th=new Thread(new ImageOutPut(file,"face/"+param));
       th.start();
       bysjImgurlBaseMapper.insertBysjImgurl(bysj);
    }
@@ -49,7 +49,7 @@ public class ImgService {
          return;
       }
       bysj.setProseurl("www.maybe123.top:888/image/text/"+param);
-      Thread th=new Thread(new ImageOutPut(file,param));
+      Thread th=new Thread(new ImageOutPut(file,"text/"+param));
       th.start();
       bysjImgurlBaseMapper.insertBysjImgurl(bysj);
    }
@@ -58,5 +58,11 @@ public class ImgService {
       BysjImgurl bysjImgurl=new BysjImgurl();
       bysjImgurl.setProseurl(imgurl);
       return bysjImgurlBaseMapper.queryBysjImgurlLimit1(bysjImgurl);
+   }
+   //仅仅上传图片
+   public void upImage(MultipartFile file,String parm){
+      ImageOutPut im=new ImageOutPut(file,parm);
+      Thread th=new Thread(im);
+      th.start();
    }
 }
