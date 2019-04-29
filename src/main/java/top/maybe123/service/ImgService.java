@@ -52,8 +52,8 @@ public class ImgService {
       {
          return;
       }
-      bysj.setProseurl("www.maybe123.top:888/image/text/"+param);
-      Thread th=new Thread(new ImageOutPut(file,"text/"+param));
+      bysj.setProseurl("www.maybe123.top:888/image/tex/"+param);
+      Thread th=new Thread(new ImageOutPut(file,"tex/"+param));
       th.start();
       bysjImgurlBaseMapper.insertBysjImgurl(bysj);
    }

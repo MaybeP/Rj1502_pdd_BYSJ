@@ -32,6 +32,9 @@
                     <if test="prose_classify!=null">
                         `prose_classify`,
                     </if>
+                    <if test="prose_img!=null">
+                        `prose_img`,
+                    </if>
         </trim>
         )
         VALUES
@@ -60,6 +63,9 @@
                 </if>
                 <if test="prose_classify!=null">
                     #{prose_classify},
+                </if>
+                <if test="prose_img!=null">
+                    #{prose_img},
                 </if>
         </trim>
         )
@@ -93,6 +99,9 @@
             <if test="prose_classify != null and prose_classify!=''">
                 `prose_classify` = #{prose_classify},
             </if>
+            <if test="prose_img != null and prose_img!=''">
+                `prose_img` = #{prose_img},
+            </if>
         </trim>
         WHERE
         <trim suffixOverrides="and">
@@ -124,6 +133,9 @@
         </if>
         <if test="set.prose_classify != null and set.prose_classify!=''">
             `prose_classify` = #{set.prose_classify},
+        </if>
+        <if test="set.prose_img != null and set.prose_img!=''">
+            `prose_img` = #{set.prose_img},
         </if>
         </trim>
         <trim prefix="where" suffixOverrides="and | or">
@@ -271,6 +283,26 @@
                 </foreach>
                 ) and
             </if>
+                <if test="where.prose_imgList != null">
+                    `prose_img` in
+                    <foreach collection="where.prose_imgList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyProse_img!=null and where.fuzzyProse_img.size()>0">
+                (
+                <foreach collection="where.fuzzyProse_img"  separator="or" item="item">
+                    `Prose_img` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyProse_img!=null and where.rightFuzzyProse_img.size()>0">
+                (
+                <foreach collection="where.rightFuzzyProse_img"  separator="or" item="item">
+                    `Prose_img` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
         </trim>
     </update>
 
@@ -284,6 +316,7 @@
         <result property="prose_times" column="prose_times"/>
         <result property="prose_content" column="prose_content"/>
         <result property="prose_classify" column="prose_classify"/>
+        <result property="prose_img" column="prose_img"/>
     </resultMap>
 
 
@@ -315,6 +348,9 @@
             </if>
             <if test="prose_classify != null and prose_classify!=''">
                 `prose_classify` = #{prose_classify} and
+            </if>
+            <if test="prose_img != null and prose_img!=''">
+                `prose_img` = #{prose_img} and
             </if>
             <if test = "(_parameter instanceof top.maybe123.pojo.BysjProse$QueryBuilder) == true">
                 <if test="IdList != null">
@@ -461,8 +497,29 @@
                     </foreach>
                     ) and
                 </if>
+                <if test="prose_imgList != null">
+                    `prose_img` in
+                    <foreach collection="prose_imgList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyProse_img!=null and fuzzyProse_img.size()>0">
+                    (
+                    <foreach collection="fuzzyProse_img"  separator="or" item="item">
+                        `Prose_img` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyProse_img!=null and rightFuzzyProse_img.size()>0">
+                    (
+                    <foreach collection="rightFuzzyProse_img"  separator="or" item="item">
+                        `Prose_img` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
             </if>
         </trim>
+        limit 16
     </select>
 
     <select id="queryBysjProseLimit1" resultMap="BysjProseMap">
@@ -493,6 +550,9 @@
             </if>
             <if test="prose_classify != null and prose_classify!=''">
                 `prose_classify` = #{prose_classify} and
+            </if>
+            <if test="prose_img != null and prose_img!=''">
+                `prose_img` = #{prose_img} and
             </if>
             <if test = "(_parameter instanceof top.maybe123.pojo.BysjProse$QueryBuilder) == true">
                     <if test="IdList != null">
@@ -639,6 +699,26 @@
                     </foreach>
                     ) and
                 </if>
+                    <if test="prose_imgList != null">
+                        `prose_img` in
+                        <foreach collection="prose_imgList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyProse_img!=null and fuzzyProse_img.size()>0">
+                    (
+                    <foreach collection="fuzzyProse_img"  separator="or" item="item">
+                        `Prose_img` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyProse_img!=null and rightFuzzyProse_img.size()>0">
+                    (
+                    <foreach collection="rightFuzzyProse_img"  separator="or" item="item">
+                        `Prose_img` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
             </if>
         </trim>
         limit 1
@@ -654,6 +734,7 @@
         `prose_times`,
         `prose_content`,
         `prose_classify`,
+        `prose_img`,
         </trim>
     </sql>
 
@@ -698,6 +779,9 @@
                     <if test="fetchFields.fetchFields.prose_classify==true">
                         `prose_classify`,
                     </if>
+                    <if test="fetchFields.fetchFields.prose_img==true">
+                        `prose_img`,
+                    </if>
                     </if>
                     <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
                     <if test="fetchFields.excludeFields.Id==null">
@@ -723,6 +807,9 @@
                     </if>
                     <if test="fetchFields.excludeFields.prose_classify==null">
                         `prose_classify`,
+                    </if>
+                    <if test="fetchFields.excludeFields.prose_img==null">
+                        `prose_img`,
                     </if>
                     </if>
                     <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">

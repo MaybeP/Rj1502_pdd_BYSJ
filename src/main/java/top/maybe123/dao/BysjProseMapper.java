@@ -8,6 +8,6 @@ import top.maybe123.dao.base.BysjProseBaseMapper;
 *  @author author
 */
 public interface BysjProseMapper extends BysjProseBaseMapper{
-
-
+	
+	List<BysjProse> queryBysjProse(int startRow,int pageSize );
 }

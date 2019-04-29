@@ -36,8 +36,22 @@
       <param-value>true</param-value>
     </init-param>
   </filter>
+
   <filter-mapping>
     <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>MyFilter</filter-name>
+    <filter-class>top.maybe123.filter.MyFilter</filter-class>
+    <init-param>
+      <param-name>IsCross</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>MyFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 </web-app>

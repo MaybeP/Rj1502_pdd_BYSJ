@@ -51,4 +51,10 @@ public class ProseController {
 		proseService.deleteProse(bysjProse);
 	}
 	
+	//分页查询文章
+	@RequestMapping("getProsePage.action")
+	public @ResponseBody List<BysjProse> getProsePage(@Param("page")int page){
+		return proseService.getProsePage(page);
+	}
+	
 }

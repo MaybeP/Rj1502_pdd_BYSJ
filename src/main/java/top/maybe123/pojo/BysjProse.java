@@ -10,7 +10,7 @@ import java.util.List;
 */
 public class BysjProse implements Serializable {
 
-    private static final long serialVersionUID = 1554022609710L;
+    private static final long serialVersionUID = 1555222542511L;
 
 
     /**

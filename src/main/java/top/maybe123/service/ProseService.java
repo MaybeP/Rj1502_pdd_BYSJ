@@ -2,6 +2,7 @@ package top.maybe123.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.maybe123.dao.BysjProseMapper;
 import top.maybe123.dao.base.BysjProseBaseMapper;
 import top.maybe123.pojo.BysjProse;
 
@@ -17,6 +18,8 @@ import java.util.List;
 public class ProseService {
 	@Autowired
 	BysjProseBaseMapper bysjProseBaseMapper;
+	@Autowired
+	BysjProseMapper bysjProseMapper;
 	//查询多篇文章信息
 	public List<BysjProse> getProse(String title){
 		BysjProse bysjProse=new BysjProse();
@@ -47,5 +50,9 @@ public class ProseService {
 	public void deleteProse(BysjProse bysjProse){
 		bysjProse.setProse_titl("bysj_delete");
 		bysjProseBaseMapper.updateBysjProse(bysjProse);
+	}
+	//分页查询文章
+	public List<BysjProse> getProsePage(int page){
+		return bysjProseMapper.queryBysjProse((page-1)*16,page*16);
 	}
 }

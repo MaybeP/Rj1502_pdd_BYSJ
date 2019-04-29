@@ -19,8 +19,8 @@ public class CommentService {
 	BysjCommentBaseMapper bysjCommentBaseMapper;
 	//得到多条读后感信息
 	public List<BysjComment> getComment(){
-		
-		return bysjCommentBaseMapper.queryBysjComment(new BysjComment());
+		BysjComment bysjComment=new BysjComment();
+		return bysjCommentBaseMapper.queryBysjComment(bysjComment);
 	}
 	//得到一条读后感信息
 	public BysjComment getCommentOne(String comment){
