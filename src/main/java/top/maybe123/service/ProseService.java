@@ -53,6 +53,9 @@ public class ProseService {
 	}
 	//分页查询文章
 	public List<BysjProse> getProsePage(int page){
-		return bysjProseMapper.queryBysjProse((page-1)*16,page*16);
+		BysjProse.QueryBuilder queryBuilder=BysjProse.QueryBuild();
+		queryBuilder.IdBetWeen((page-1)*16,page*16);
+		return bysjProseBaseMapper.queryBysjProse(queryBuilder);
+
 	}
 }

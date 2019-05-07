@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.maybe123.dao.BysjProseMapper">
+
+    <resultMap type="top.maybe123.pojo.BysjProse" id="BysjProseMap">
+        <result property="Id" column="Id"/>
+        <result property="prose_titl" column="prose_titl"/>
+        <result property="prose_time" column="prose_time"/>
+        <result property="prose_from" column="prose_from"/>
+        <result property="prose_author" column="prose_author"/>
+        <result property="prose_times" column="prose_times"/>
+        <result property="prose_content" column="prose_content"/>
+        <result property="prose_classify" column="prose_classify"/>
+        <result property="porse_img" column="prose_img"/>
+    </resultMap>
+
+    <select id="queryBysjProse" resultMap="BysjProseMap">
+        Id,prose_titl,prose_time,prose_from,prose_author,prose_times,prose_content,prose_classify,porse_img
+    from bysj_prose
+    limit #{0},#{1}
+    </select>
+
+
+</mapper>
