@@ -18,8 +18,9 @@ public class CommentService {
 	@Autowired
 	BysjCommentBaseMapper bysjCommentBaseMapper;
 	//得到多条读后感信息
-	public List<BysjComment> getComment(){
+	public List<BysjComment> getComment(String title){
 		BysjComment bysjComment=new BysjComment();
+		bysjComment.setComment_title(title);
 		return bysjCommentBaseMapper.queryBysjComment(bysjComment);
 	}
 	//得到一条读后感信息
@@ -35,7 +36,7 @@ public class CommentService {
 		for (Iterator<BysjComment> it=list.iterator();it.hasNext(); ){
 
 			BysjComment by=it.next();
-			System.out.println(by.toString());
+			by.setComment_times(by.getComment_times()+1);
 			bysjCommentBaseMapper.insertBysjComment((BysjComment) by);
 		}
 	}

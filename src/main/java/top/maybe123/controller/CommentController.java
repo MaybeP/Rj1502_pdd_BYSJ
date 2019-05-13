@@ -27,8 +27,8 @@ public class CommentController {
 	//获取多条读后感
 	@RequestMapping("getComment.action")
 	public @ResponseBody
-	List<BysjComment> getComment(){
-		return commentService.getComment();
+	List<BysjComment> getComment(@Param("title")String title){
+		return commentService.getComment(title);
 	}
 	
 	//查询一条读后感
