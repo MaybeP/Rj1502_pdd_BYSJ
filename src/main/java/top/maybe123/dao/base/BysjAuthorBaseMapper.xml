@@ -26,6 +26,9 @@
                     <if test="au_say!=null">
                         `au_say`,
                     </if>
+                    <if test="au_imgsrc!=null">
+                        `au_imgsrc`,
+                    </if>
         </trim>
         )
         VALUES
@@ -49,6 +52,9 @@
                 <if test="au_say!=null">
                     #{au_say},
                 </if>
+                <if test="au_imgsrc!=null">
+                    #{au_imgsrc},
+                </if>
         </trim>
         )
     </insert>
@@ -56,7 +62,7 @@
 
 
 
-    <update  id="updateBysjAuthor">
+    <update id="updateBysjAuthor">
         UPDATE `bysj_author`
         SET
         <trim suffixOverrides=",">
@@ -74,6 +80,9 @@
             </if>
             <if test="au_say != null and au_say!=''">
                 `au_say` = #{au_say},
+            </if>
+            <if test="au_imgsrc != null and au_imgsrc!=''">
+                `au_imgsrc` = #{au_imgsrc},
             </if>
         </trim>
         WHERE
@@ -100,6 +109,9 @@
         </if>
         <if test="set.au_say != null and set.au_say!=''">
             `au_say` = #{set.au_say},
+        </if>
+        <if test="set.au_imgsrc != null and set.au_imgsrc!=''">
+            `au_imgsrc` = #{set.au_imgsrc},
         </if>
         </trim>
         <trim prefix="where" suffixOverrides="and | or">
@@ -215,6 +227,26 @@
                 </foreach>
                 ) and
             </if>
+                <if test="where.au_imgsrcList != null">
+                    `au_imgsrc` in
+                    <foreach collection="where.au_imgsrcList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAu_imgsrc!=null and where.fuzzyAu_imgsrc.size()>0">
+                (
+                <foreach collection="where.fuzzyAu_imgsrc"  separator="or" item="item">
+                    `Au_imgsrc` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAu_imgsrc!=null and where.rightFuzzyAu_imgsrc.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAu_imgsrc"  separator="or" item="item">
+                    `Au_imgsrc` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
         </trim>
     </update>
 
@@ -226,6 +258,7 @@
         <result property="au_job" column="au_job"/>
         <result property="au_famous" column="au_famous"/>
         <result property="au_say" column="au_say"/>
+        <result property="au_imgsrc" column="au_imgsrc"/>
     </resultMap>
 
 
@@ -251,6 +284,9 @@
             </if>
             <if test="au_say != null and au_say!=''">
                 `au_say` = #{au_say} and
+            </if>
+            <if test="au_imgsrc != null and au_imgsrc!=''">
+                `au_imgsrc` = #{au_imgsrc} and
             </if>
             <if test = "(_parameter instanceof top.maybe123.pojo.BysjAuthor$QueryBuilder) == true">
                 <if test="IdList != null">
@@ -365,6 +401,26 @@
                     </foreach>
                     ) and
                 </if>
+                <if test="au_imgsrcList != null">
+                    `au_imgsrc` in
+                    <foreach collection="au_imgsrcList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAu_imgsrc!=null and fuzzyAu_imgsrc.size()>0">
+                    (
+                    <foreach collection="fuzzyAu_imgsrc"  separator="or" item="item">
+                        `Au_imgsrc` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAu_imgsrc!=null and rightFuzzyAu_imgsrc.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAu_imgsrc"  separator="or" item="item">
+                        `Au_imgsrc` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
             </if>
         </trim>
     </select>
@@ -391,6 +447,9 @@
             </if>
             <if test="au_say != null and au_say!=''">
                 `au_say` = #{au_say} and
+            </if>
+            <if test="au_imgsrc != null and au_imgsrc!=''">
+                `au_imgsrc` = #{au_imgsrc} and
             </if>
             <if test = "(_parameter instanceof top.maybe123.pojo.BysjAuthor$QueryBuilder) == true">
                     <if test="IdList != null">
@@ -505,6 +564,26 @@
                     </foreach>
                     ) and
                 </if>
+                    <if test="au_imgsrcList != null">
+                        `au_imgsrc` in
+                        <foreach collection="au_imgsrcList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAu_imgsrc!=null and fuzzyAu_imgsrc.size()>0">
+                    (
+                    <foreach collection="fuzzyAu_imgsrc"  separator="or" item="item">
+                        `Au_imgsrc` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAu_imgsrc!=null and rightFuzzyAu_imgsrc.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAu_imgsrc"  separator="or" item="item">
+                        `Au_imgsrc` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
             </if>
         </trim>
         limit 1
@@ -518,6 +597,7 @@
         `au_job`,
         `au_famous`,
         `au_say`,
+        `au_imgsrc`,
         </trim>
     </sql>
 
@@ -556,6 +636,9 @@
                     <if test="fetchFields.fetchFields.au_say==true">
                         `au_say`,
                     </if>
+                    <if test="fetchFields.fetchFields.au_imgsrc==true">
+                        `au_imgsrc`,
+                    </if>
                     </if>
                     <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
                     <if test="fetchFields.excludeFields.Id==null">
@@ -575,6 +658,9 @@
                     </if>
                     <if test="fetchFields.excludeFields.au_say==null">
                         `au_say`,
+                    </if>
+                    <if test="fetchFields.excludeFields.au_imgsrc==null">
+                        `au_imgsrc`,
                     </if>
                     </if>
                     <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">

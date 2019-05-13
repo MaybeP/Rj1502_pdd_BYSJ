@@ -10,7 +10,7 @@ import java.util.List;
 */
 public class BysjAuthor implements Serializable {
 
-    private static final long serialVersionUID = 1554022594719L;
+    private static final long serialVersionUID = 1557569109608L;
 
 
     /**
@@ -52,7 +52,7 @@ public class BysjAuthor implements Serializable {
 
     /**
     * 作者头像
-    * isNullAble:0,defaultVal:
+    * isNullAble:0,defaultVal:http://www.maybe123.top:888/image/self/8-2.jpg
     */
     private String au_imgsrc;
 

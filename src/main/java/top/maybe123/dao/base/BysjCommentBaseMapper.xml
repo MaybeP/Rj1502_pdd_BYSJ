@@ -23,6 +23,12 @@
                     <if test="comment_times!=null">
                         `comment_times`,
                     </if>
+                    <if test="comment_title!=null">
+                        `comment_title`,
+                    </if>
+                    <if test="comment_date!=null">
+                        `comment_date`,
+                    </if>
         </trim>
         )
         VALUES
@@ -42,6 +48,12 @@
                 </if>
                 <if test="comment_times!=null">
                     #{comment_times},
+                </if>
+                <if test="comment_title!=null">
+                    #{comment_title},
+                </if>
+                <if test="comment_date!=null">
+                    #{comment_date},
                 </if>
         </trim>
         )
@@ -66,6 +78,12 @@
             <if test="comment_times != null">
                 `comment_times` = #{comment_times},
             </if>
+            <if test="comment_title != null and comment_title!=''">
+                `comment_title` = #{comment_title},
+            </if>
+            <if test="comment_date != null and comment_date!=''">
+                `comment_date` = #{comment_date},
+            </if>
         </trim>
         WHERE
         <trim suffixOverrides="and">
@@ -88,6 +106,12 @@
         </if>
         <if test="set.comment_times != null">
             `comment_times` = #{set.comment_times},
+        </if>
+        <if test="set.comment_title != null and set.comment_title!=''">
+            `comment_title` = #{set.comment_title},
+        </if>
+        <if test="set.comment_date != null and set.comment_date!=''">
+            `comment_date` = #{set.comment_date},
         </if>
         </trim>
         <trim prefix="where" suffixOverrides="and | or">
@@ -175,6 +199,46 @@
             <if test="where.comment_timesEd!=null">
                 `comment_times` &lt;= #{where.comment_timesEd} and
             </if>
+                <if test="where.comment_titleList != null">
+                    `comment_title` in
+                    <foreach collection="where.comment_titleList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyComment_title!=null and where.fuzzyComment_title.size()>0">
+                (
+                <foreach collection="where.fuzzyComment_title"  separator="or" item="item">
+                    `Comment_title` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyComment_title!=null and where.rightFuzzyComment_title.size()>0">
+                (
+                <foreach collection="where.rightFuzzyComment_title"  separator="or" item="item">
+                    `Comment_title` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.comment_dateList != null">
+                    `comment_date` in
+                    <foreach collection="where.comment_dateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyComment_date!=null and where.fuzzyComment_date.size()>0">
+                (
+                <foreach collection="where.fuzzyComment_date"  separator="or" item="item">
+                    `Comment_date` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyComment_date!=null and where.rightFuzzyComment_date.size()>0">
+                (
+                <foreach collection="where.rightFuzzyComment_date"  separator="or" item="item">
+                    `Comment_date` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
         </trim>
     </update>
 
@@ -185,6 +249,8 @@
         <result property="comment_src" column="comment_src"/>
         <result property="comment_content" column="comment_content"/>
         <result property="comment_times" column="comment_times"/>
+        <result property="comment_title" column="comment_title"/>
+        <result property="comment_date" column="comment_date"/>
     </resultMap>
 
 
@@ -207,6 +273,12 @@
             </if>
             <if test="comment_times != null">
                 `comment_times` = #{comment_times} and
+            </if>
+            <if test="comment_title != null and comment_title!=''">
+                `comment_title` = #{comment_title} and
+            </if>
+            <if test="comment_date != null and comment_date!=''">
+                `comment_date` = #{comment_date} and
             </if>
             <if test = "(_parameter instanceof top.maybe123.pojo.BysjComment$QueryBuilder) == true">
                 <if test="IdList != null">
@@ -293,6 +365,46 @@
                 <if test="comment_timesEd!=null">
                     `comment_times` &lt;= #{comment_timesEd} and
                 </if>
+                <if test="comment_titleList != null">
+                    `comment_title` in
+                    <foreach collection="comment_titleList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyComment_title!=null and fuzzyComment_title.size()>0">
+                    (
+                    <foreach collection="fuzzyComment_title"  separator="or" item="item">
+                        `Comment_title` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyComment_title!=null and rightFuzzyComment_title.size()>0">
+                    (
+                    <foreach collection="rightFuzzyComment_title"  separator="or" item="item">
+                        `Comment_title` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="comment_dateList != null">
+                    `comment_date` in
+                    <foreach collection="comment_dateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyComment_date!=null and fuzzyComment_date.size()>0">
+                    (
+                    <foreach collection="fuzzyComment_date"  separator="or" item="item">
+                        `Comment_date` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyComment_date!=null and rightFuzzyComment_date.size()>0">
+                    (
+                    <foreach collection="rightFuzzyComment_date"  separator="or" item="item">
+                        `Comment_date` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
             </if>
         </trim>
     </select>
@@ -316,6 +428,12 @@
             </if>
             <if test="comment_times != null">
                 `comment_times` = #{comment_times} and
+            </if>
+            <if test="comment_title != null and comment_title!=''">
+                `comment_title` = #{comment_title} and
+            </if>
+            <if test="comment_date != null and comment_date!=''">
+                `comment_date` = #{comment_date} and
             </if>
             <if test = "(_parameter instanceof top.maybe123.pojo.BysjComment$QueryBuilder) == true">
                     <if test="IdList != null">
@@ -402,6 +520,46 @@
                 <if test="comment_timesEd!=null">
                     `comment_times` &lt;= #{comment_timesEd} and
                 </if>
+                    <if test="comment_titleList != null">
+                        `comment_title` in
+                        <foreach collection="comment_titleList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyComment_title!=null and fuzzyComment_title.size()>0">
+                    (
+                    <foreach collection="fuzzyComment_title"  separator="or" item="item">
+                        `Comment_title` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyComment_title!=null and rightFuzzyComment_title.size()>0">
+                    (
+                    <foreach collection="rightFuzzyComment_title"  separator="or" item="item">
+                        `Comment_title` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="comment_dateList != null">
+                        `comment_date` in
+                        <foreach collection="comment_dateList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyComment_date!=null and fuzzyComment_date.size()>0">
+                    (
+                    <foreach collection="fuzzyComment_date"  separator="or" item="item">
+                        `Comment_date` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyComment_date!=null and rightFuzzyComment_date.size()>0">
+                    (
+                    <foreach collection="rightFuzzyComment_date"  separator="or" item="item">
+                        `Comment_date` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
             </if>
         </trim>
         limit 1
@@ -414,6 +572,8 @@
         `comment_src`,
         `comment_content`,
         `comment_times`,
+        `comment_title`,
+        `comment_date`,
         </trim>
     </sql>
 
@@ -449,6 +609,12 @@
                     <if test="fetchFields.fetchFields.comment_times==true">
                         `comment_times`,
                     </if>
+                    <if test="fetchFields.fetchFields.comment_title==true">
+                        `comment_title`,
+                    </if>
+                    <if test="fetchFields.fetchFields.comment_date==true">
+                        `comment_date`,
+                    </if>
                     </if>
                     <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
                     <if test="fetchFields.excludeFields.Id==null">
@@ -465,6 +631,12 @@
                     </if>
                     <if test="fetchFields.excludeFields.comment_times==null">
                         `comment_times`,
+                    </if>
+                    <if test="fetchFields.excludeFields.comment_title==null">
+                        `comment_title`,
+                    </if>
+                    <if test="fetchFields.excludeFields.comment_date==null">
+                        `comment_date`,
                     </if>
                     </if>
                     <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">

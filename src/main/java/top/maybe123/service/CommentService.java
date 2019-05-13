@@ -33,11 +33,14 @@ public class CommentService {
 	public  void insertBysjComment(List<BysjComment> list){
 		
 		for (Iterator<BysjComment> it=list.iterator();it.hasNext(); ){
-			bysjCommentBaseMapper.insertBysjComment(it.next());
+
+			BysjComment by=it.next();
+			System.out.println(by.toString());
+			bysjCommentBaseMapper.insertBysjComment((BysjComment) by);
 		}
 	}
 	//更新读后感
-	public void uopdate(BysjComment bysjComment){
+	public void update(BysjComment bysjComment){
 		bysjCommentBaseMapper.updateBysjComment(bysjComment);
 	}
 	//删除读后感,没有真实的删除，仅仅是更新去掉联系

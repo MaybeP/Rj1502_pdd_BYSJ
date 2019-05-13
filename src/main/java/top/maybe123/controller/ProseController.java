@@ -56,5 +56,13 @@ public class ProseController {
 	public @ResponseBody List<BysjProse> getProsePage(@Param("page")int page){
 		return proseService.getProsePage(page);
 	}
-	
+	//查询首页轮播推荐
+	@RequestMapping("getProseTj.action")
+	public @ResponseBody List<BysjProse> getProseTj(){
+		return proseService.getProseTj();
+	}
+	//获取页面总数
+//	@RequestMapping("getProseCount.action")
+//	public @ResponseBody int getProseCount(){ return proseService.getProseCount();}
+
 }

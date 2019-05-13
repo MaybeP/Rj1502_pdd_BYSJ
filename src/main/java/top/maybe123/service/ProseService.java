@@ -31,7 +31,10 @@ public class ProseService {
 	public BysjProse getProseOne(String title){
 		BysjProse bysjProse=new BysjProse();
 		bysjProse.setProse_titl(title);
-		return bysjProseBaseMapper.queryBysjProseLimit1(bysjProse);
+	 BysjProse	upda=bysjProseBaseMapper.queryBysjProseLimit1(bysjProse);
+	 upda.setProse_times(upda.getProse_times()+1);
+	 bysjProseBaseMapper.updateBysjProse(upda);
+	 return upda;
 	}
 	
 	//插入文章信息
@@ -54,8 +57,15 @@ public class ProseService {
 	//分页查询文章
 	public List<BysjProse> getProsePage(int page){
 		BysjProse.QueryBuilder queryBuilder=BysjProse.QueryBuild();
-		queryBuilder.IdBetWeen((page-1)*16,page*16);
+		queryBuilder.IdBetWeen((page-1)*16+1,page*16+1);
 		return bysjProseBaseMapper.queryBysjProse(queryBuilder);
 
 	}
+	//推荐轮播图数据
+	public List<BysjProse> getProseTj(){
+		BysjProse.QueryBuilder queryBuilder=BysjProse.QueryBuild();
+		queryBuilder.fuzzyProse_classify("推荐");
+		return bysjProseBaseMapper.queryBysjProse(queryBuilder);
+	}
+
 }

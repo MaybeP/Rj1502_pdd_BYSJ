@@ -10,7 +10,7 @@ import java.util.List;
 */
 public class BysjComment implements Serializable {
 
-    private static final long serialVersionUID = 1554022601740L;
+    private static final long serialVersionUID = 1557719199038L;
 
 
     /**
@@ -28,7 +28,7 @@ public class BysjComment implements Serializable {
 
     /**
     * 头像
-    * isNullAble:0,defaultVal:
+    * isNullAble:0,defaultVal:http://img1.imgtn.bdimg.com/it/u=1218485516,264644399&fm=26&gp=0.jpg
     */
     private String comment_src;
 
@@ -49,6 +49,12 @@ public class BysjComment implements Serializable {
     * isNullAble:0,defaultVal:
     */
     private String comment_title;
+
+    /**
+    * 评论的时间
+    * isNullAble:0,defaultVal:未知时间
+    */
+    private String comment_date;
 
 
     public void setId(Integer Id){this.Id = Id;}
@@ -74,6 +80,10 @@ public class BysjComment implements Serializable {
     public void setComment_title(String comment_title){this.comment_title = comment_title;}
 
     public String getComment_title(){return this.comment_title;}
+
+    public void setComment_date(String comment_date){this.comment_date = comment_date;}
+
+    public String getComment_date(){return this.comment_date;}
     @Override
     public String toString() {
         return "BysjComment{" +
@@ -83,6 +93,7 @@ public class BysjComment implements Serializable {
                 "comment_content='" + comment_content + '\'' +
                 "comment_times='" + comment_times + '\'' +
                 "comment_title='" + comment_title + '\'' +
+                "comment_date='" + comment_date + '\'' +
             '}';
     }
 
@@ -203,6 +214,18 @@ public class BysjComment implements Serializable {
         private List<String> rightFuzzyComment_title;
 
         public List<String> getRightFuzzyComment_title(){return this.rightFuzzyComment_title;}
+        private List<String> comment_dateList;
+
+        public List<String> getComment_dateList(){return this.comment_dateList;}
+
+
+        private List<String> fuzzyComment_date;
+
+        public List<String> getFuzzyComment_date(){return this.fuzzyComment_date;}
+
+        private List<String> rightFuzzyComment_date;
+
+        public List<String> getRightFuzzyComment_date(){return this.rightFuzzyComment_date;}
         private QueryBuilder (){
             this.fetchFields = new HashMap<>();
         }
@@ -468,6 +491,51 @@ public class BysjComment implements Serializable {
             setFetchFields("excludeFields","comment_title");
             return this;
         }
+
+        public QueryBuilder fuzzyComment_date (List<String> fuzzyComment_date){
+            this.fuzzyComment_date = fuzzyComment_date;
+            return this;
+        }
+
+        public QueryBuilder fuzzyComment_date (String ... fuzzyComment_date){
+            this.fuzzyComment_date = solveNullList(fuzzyComment_date);
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyComment_date (List<String> rightFuzzyComment_date){
+            this.rightFuzzyComment_date = rightFuzzyComment_date;
+            return this;
+        }
+
+        public QueryBuilder rightFuzzyComment_date (String ... rightFuzzyComment_date){
+            this.rightFuzzyComment_date = solveNullList(rightFuzzyComment_date);
+            return this;
+        }
+
+        public QueryBuilder comment_date(String comment_date){
+            setComment_date(comment_date);
+            return this;
+        }
+
+        public QueryBuilder comment_dateList(String ... comment_date){
+            this.comment_dateList = solveNullList(comment_date);
+            return this;
+        }
+
+        public QueryBuilder comment_dateList(List<String> comment_date){
+            this.comment_dateList = comment_date;
+            return this;
+        }
+
+        public QueryBuilder fetchComment_date(){
+            setFetchFields("fetchFields","comment_date");
+            return this;
+        }
+
+        public QueryBuilder excludeComment_date(){
+            setFetchFields("excludeFields","comment_date");
+            return this;
+        }
         private <T>List<T> solveNullList(T ... objs){
             if (objs != null){
             List<T> list = new ArrayList<>();
@@ -583,6 +651,18 @@ public class BysjComment implements Serializable {
         private List<String> rightFuzzyComment_title;
 
         public List<String> getRightFuzzyComment_title(){return this.rightFuzzyComment_title;}
+        private List<String> comment_dateList;
+
+        public List<String> getComment_dateList(){return this.comment_dateList;}
+
+
+        private List<String> fuzzyComment_date;
+
+        public List<String> getFuzzyComment_date(){return this.fuzzyComment_date;}
+
+        private List<String> rightFuzzyComment_date;
+
+        public List<String> getRightFuzzyComment_date(){return this.rightFuzzyComment_date;}
 
         public ConditionBuilder IdBetWeen(Integer IdSt,Integer IdEd){
             this.IdSt = IdSt;
@@ -756,6 +836,36 @@ public class BysjComment implements Serializable {
             return this;
         }
 
+        public ConditionBuilder fuzzyComment_date (List<String> fuzzyComment_date){
+            this.fuzzyComment_date = fuzzyComment_date;
+            return this;
+        }
+
+        public ConditionBuilder fuzzyComment_date (String ... fuzzyComment_date){
+            this.fuzzyComment_date = solveNullList(fuzzyComment_date);
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyComment_date (List<String> rightFuzzyComment_date){
+            this.rightFuzzyComment_date = rightFuzzyComment_date;
+            return this;
+        }
+
+        public ConditionBuilder rightFuzzyComment_date (String ... rightFuzzyComment_date){
+            this.rightFuzzyComment_date = solveNullList(rightFuzzyComment_date);
+            return this;
+        }
+
+        public ConditionBuilder comment_dateList(String ... comment_date){
+            this.comment_dateList = solveNullList(comment_date);
+            return this;
+        }
+
+        public ConditionBuilder comment_dateList(List<String> comment_date){
+            this.comment_dateList = comment_date;
+            return this;
+        }
+
         private <T>List<T> solveNullList(T ... objs){
             if (objs != null){
             List<T> list = new ArrayList<>();
@@ -802,6 +912,10 @@ public class BysjComment implements Serializable {
         }
         public Builder comment_title(String comment_title){
             this.obj.setComment_title(comment_title);
+            return this;
+        }
+        public Builder comment_date(String comment_date){
+            this.obj.setComment_date(comment_date);
             return this;
         }
         public BysjComment build(){return obj;}

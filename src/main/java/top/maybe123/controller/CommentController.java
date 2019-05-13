@@ -1,13 +1,17 @@
 package top.maybe123.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.maybe123.pojo.BysjComment;
 import top.maybe123.service.CommentService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -35,15 +39,19 @@ public class CommentController {
 	}
 	
 	//插入一条或多条读后感
-	@RequestMapping("addComment.action")
-	public void addComment(@Param("comment") List<BysjComment> list){
-		commentService.insertBysjComment(list);
+	@RequestMapping(value = "addComment.action",method= RequestMethod.POST)
+	public @ResponseBody String addComment( @Param("comment") String comment){
+		Gson gson=new Gson();
+		List<BysjComment>  li=  gson.fromJson(comment,new TypeToken<ArrayList<BysjComment>>() {
+		}.getType());
+		commentService.insertBysjComment(li);
+		return "success";
 	}
 	
 	//更新一条读后感
 	@RequestMapping("updateComment.action")
 	public void updateComment(@Param("comment")BysjComment bysjComment){
-		commentService.uopdate(bysjComment);
+		commentService.update(bysjComment);
 	}
 	
 	//删除一条读后感
