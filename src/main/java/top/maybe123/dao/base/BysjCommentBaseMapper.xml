@@ -407,6 +407,8 @@
                 </if>
             </if>
         </trim>
+        order by `Id` desc
+     limit 11
     </select>
 
     <select id="queryBysjCommentLimit1" resultMap="BysjCommentMap">

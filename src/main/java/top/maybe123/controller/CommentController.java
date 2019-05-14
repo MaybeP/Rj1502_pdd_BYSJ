@@ -59,4 +59,10 @@ public class CommentController {
 	public void deleteComment(@Param("comment") BysjComment bysjComment){
 		commentService.delete(bysjComment);
 	}
+
+	//分页查询
+	@RequestMapping("getCommentPage.action")
+	public @ResponseBody List<BysjComment> getCommentPage(@Param("lastid")int lastid){
+		return commentService.getCommentPage(lastid);
+	}
 }

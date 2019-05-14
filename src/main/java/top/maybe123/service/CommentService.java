@@ -49,4 +49,10 @@ public class CommentService {
 		bysjComment.setComment_title("bysj_delete");
 		bysjCommentBaseMapper.updateBysjComment(bysjComment);
 	}
+	//分页查询读后感
+	public List<BysjComment> getCommentPage(int lastid){
+		BysjComment.QueryBuilder queryBuilder=BysjComment.QueryBuild();
+		queryBuilder.IdBetWeen(lastid-11>0?lastid-11:0,lastid);
+		return bysjCommentBaseMapper.queryBysjComment(queryBuilder);
+	}
 }

@@ -10,7 +10,7 @@ public class CommentControllerTest {
 	public void getComment() {
 		CommentController commentController=new CommentController();
 		
-		System.out.println(commentController.getComment());
+
 	}
 	
 	@Test
