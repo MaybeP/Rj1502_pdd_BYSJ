@@ -54,4 +54,19 @@ public BysjAuthor getAuthor(int id){
 	
 	
 	}
+
+	//作者注册
+	public void insertAuthor(BysjAuthor bysjAuthor){
+
+	BysjAuthor.QueryBuilder queryBuilder=BysjAuthor.QueryBuild();
+	queryBuilder.setAu_name(bysjAuthor.getAu_name());
+	BysjAuthor bysjAuthor1= (BysjAuthor) bysjAuthorBaseMapper.queryBysjAuthorLimit1(queryBuilder);
+	if(bysjAuthor1!=null){
+		bysjAuthor.setId(bysjAuthor1.getId());
+		bysjAuthorBaseMapper.updateBysjAuthor(bysjAuthor);
+	}else {
+	bysjAuthorBaseMapper.insertBysjAuthor(bysjAuthor);
+	}
+	}
+
 }

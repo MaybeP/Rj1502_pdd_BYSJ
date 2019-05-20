@@ -33,35 +33,51 @@ public class ImageBaidu {
   
 //上传图片文字识别的接口
     @RequestMapping(value = "/uptext.action",method= RequestMethod.POST)
-    public void uptext(@RequestParam("imag") MultipartFile file,@RequestParam("imag_name")String url
+    public @ResponseBody String uptext(@RequestParam("imag") MultipartFile file,@RequestParam("imag_name")String url
             , HttpServletRequest request
     , HttpServletResponse response) throws IOException {
         response.setHeader("Access-Control-Allow-Origin","*");
-        response.setHeader("Access-Control-Allow-Origin","127.0.0.1:8080");
+//        response.setHeader("Access-Control-Allow-Origin","127.0.0.1:8080");
         response.setHeader("Access-Control-Allow-Methods","POST,DELETE,GET,OPTIONS");
         response.setHeader("Access-Control-Max-Age","3600");
         response.setHeader("Access-Control-Allow-Headers","x-requested-with,Content-Type");
-        imgService.addtextImg(file,url);
+        return imgService.addtextImg(file,url);
+
     }
 //上传人脸识别的接口
     @RequestMapping(value = "upface.action",method= RequestMethod.POST)
-    public void insertImag(@RequestParam("imag") MultipartFile file,
+    public @ResponseBody String insertImag(@RequestParam("imag") MultipartFile file,
             @RequestParam("imag_name")String url, HttpServletRequest request
             , HttpServletResponse response) throws IOException {
         response.setHeader("Access-Control-Allow-Origin","*");
-        response.setHeader("Access-Control-Allow-Origin","127.0.0.1:8080");
+//        response.setHeader("Access-Control-Allow-Origin","127.0.0.1:8080");
         response.setHeader("Access-Control-Allow-Methods","POST,DELETE,GET,OPTIONS");
         response.setHeader("Access-Control-Max-Age","3600");
         response.setHeader("Access-Control-Allow-Headers","x-requested-with,Content-Type");
-        imgService.addfaceImg(file,url);
+
+
+
+      return   imgService.addfaceImg(file,url);
     }
     
     //得到图片json
     @RequestMapping("getImageJson.action")
     public @ResponseBody
     BysjImgurl getImageJson(@Param("url") String url){
-    return imgService.getJson(url);
+
+        return imgService.getJson(url);
     }
 
-
+    //上传文章插图
+    @RequestMapping(value = "upimage",method = RequestMethod.POST)
+    public @ResponseBody String upImag(@RequestParam("imag") MultipartFile file,
+                                       @RequestParam("imag_name")String url, HttpServletRequest request
+            , HttpServletResponse response) throws IOException {
+        response.setHeader("Access-Control-Allow-Origin","*");
+//        response.setHeader("Access-Control-Allow-Origin","127.0.0.1:8080");
+        response.setHeader("Access-Control-Allow-Methods","POST,DELETE,GET,OPTIONS");
+        response.setHeader("Access-Control-Max-Age","3600");
+        response.setHeader("Access-Control-Allow-Headers","x-requested-with,Content-Type");
+        return   imgService.upImage(file,url);
+    }
 }

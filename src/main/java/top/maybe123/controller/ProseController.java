@@ -1,13 +1,19 @@
 package top.maybe123.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import top.maybe123.pojo.BysjAuditing;
+import top.maybe123.pojo.BysjComment;
 import top.maybe123.pojo.BysjProse;
+import top.maybe123.service.AuditingService;
 import top.maybe123.service.ProseService;
 
+import java.util.ArrayList;
 import java.util.List;
 /*
 *@author pdd
@@ -18,7 +24,8 @@ public class ProseController {
 
 	@Autowired
 	ProseService proseService;
-	
+	@Autowired
+	AuditingService auditingService;
 	//得到多篇文章
 	@RequestMapping("getProse.action")
 	public @ResponseBody
@@ -35,14 +42,28 @@ public class ProseController {
 	
 	//修改文章
 	@RequestMapping("updateProse.action")
-	public void updateProse(@Param("Prose")BysjProse bysjProse){
+	public void updateProse(@Param("Prose")String Prose){
+		Gson gson=new Gson();
+		BysjProse bysjProse=gson.fromJson(Prose,BysjProse.class);
 		proseService.updateProse(bysjProse);
 	}
 	
 	//插入文章
 	@RequestMapping("insertProse.action")
-	public void insertProses(@Param("proses")List<BysjProse> list){
-		proseService.insertProse(list);
+	public @ResponseBody String insertProses(@Param("proses")String proses){
+		Gson gson=new Gson();
+		List<BysjProse>  li=  gson.fromJson(proses,new TypeToken<ArrayList<BysjProse>>() {
+		}.getType());
+
+		//插入审核信息
+		BysjAuditing bysjAuditing=new BysjAuditing();
+		bysjAuditing.setAud_classify(2);
+		bysjAuditing.setAud_content(proses);
+		bysjAuditing.setAud_result(1);
+		auditingService.insInfo(bysjAuditing);
+
+		proseService.insertProse(li);
+		return "success";
 	}
 	
 	//删除文章

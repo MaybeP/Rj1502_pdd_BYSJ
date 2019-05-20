@@ -18,7 +18,8 @@ public class ImageOutPut implements Runnable {
     }
     @Override
     public void run() {
-        File fi=new File("/www/server/nginx/html/image/"+param);
+       File fi=new File("/www/server/nginx/html/image/"+param);
+      // File fi=new File("D:\\image\\"+param);
         FileOutputStream out= null;
             try {
                 out = new FileOutputStream(fi);

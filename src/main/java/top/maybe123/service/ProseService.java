@@ -32,15 +32,22 @@ public class ProseService {
 		BysjProse bysjProse=new BysjProse();
 		bysjProse.setProse_titl(title);
 	 BysjProse	upda=bysjProseBaseMapper.queryBysjProseLimit1(bysjProse);
+	 if(upda!=null){
 	 upda.setProse_times(upda.getProse_times()+1);
 	 bysjProseBaseMapper.updateBysjProse(upda);
+	 }
 	 return upda;
 	}
 	
 	//插入文章信息
 	public void insertProse(List<BysjProse> list){
+		BysjProse.QueryBuilder queryBuilder=BysjProse.QueryBuild();
 		for(Iterator<BysjProse> it=list.iterator();it.hasNext();){
-			bysjProseBaseMapper.insertBysjProse(it.next());
+			BysjProse bb=it.next();
+			queryBuilder.setProse_titl(bb.getProse_titl());
+			if(bysjProseBaseMapper.queryBysjProse(queryBuilder)!=null)
+				bysjProseBaseMapper.updateBysjProse(bb);
+			bysjProseBaseMapper.insertBysjProse(bb);
 		}
 	}
 	
@@ -56,9 +63,18 @@ public class ProseService {
 	}
 	//分页查询文章
 	public List<BysjProse> getProsePage(int page){
-		BysjProse.QueryBuilder queryBuilder=BysjProse.QueryBuild();
-		queryBuilder.IdBetWeen((page-1)*16+1,page*16+1);
-		return bysjProseBaseMapper.queryBysjProse(queryBuilder);
+		int st=(page-1)*16+1;
+		int end=page*16+1;
+		BysjProse.QueryBuilder queryBuilder=BysjProse.QueryBuild();queryBuilder.IdBetWeen(st,end);
+		List<BysjProse> list=bysjProseBaseMapper.queryBysjProse(queryBuilder);
+		for(Iterator<BysjProse> it=list.iterator();it.hasNext();){
+			BysjProse bb=it.next();
+			if(bb.getProse_titl().equals("delete_prose")){
+				it.remove();
+			}
+
+		}
+		return  list;
 
 	}
 	//推荐轮播图数据

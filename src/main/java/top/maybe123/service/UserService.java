@@ -19,6 +19,8 @@ public class UserService {
 	}
 	//修改密码，以及其他
 	public void updateUser(BysjUser bysjUser){
+
+		System.out.println(bysjUser.toString());
 		bysjUserBaseMapper.updateBysjUser(bysjUser);
 	}
 	//插入用户

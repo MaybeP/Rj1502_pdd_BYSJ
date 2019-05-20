@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import top.maybe123.pojo.BysjAuditing;
 import top.maybe123.pojo.BysjComment;
+import top.maybe123.service.AuditingService;
 import top.maybe123.service.CommentService;
 
 import java.util.ArrayList;
@@ -23,6 +25,9 @@ public class CommentController {
 	
 	@Autowired
 	CommentService commentService;
+
+	@Autowired
+	AuditingService auditingService;
 	
 	//获取多条读后感
 	@RequestMapping("getComment.action")
@@ -44,6 +49,13 @@ public class CommentController {
 		Gson gson=new Gson();
 		List<BysjComment>  li=  gson.fromJson(comment,new TypeToken<ArrayList<BysjComment>>() {
 		}.getType());
+//插入审核信息
+		BysjAuditing bysjAuditing=new BysjAuditing();
+		bysjAuditing.setAud_classify(1);
+		bysjAuditing.setAud_content(comment);
+		bysjAuditing.setAud_result(1);
+		auditingService.insInfo(bysjAuditing);
+
 		commentService.insertBysjComment(li);
 		return "success";
 	}

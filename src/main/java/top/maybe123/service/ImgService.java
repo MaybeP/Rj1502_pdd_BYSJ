@@ -20,42 +20,51 @@ public class ImgService {
    @Autowired
    BysjImgurlBaseMapper bysjImgurlBaseMapper;
    //添加面部识别结果
-   public void addfaceImg(MultipartFile file,String url) throws IOException {
+   public String addfaceImg(MultipartFile file,String url) throws IOException {
       BysjImgurl bysj;
+      String json;
       String param=url+file.getOriginalFilename();
       bysj=getJson(param);
       if(bysj==null){
          bysj=new BysjImgurl();
-         bysj.setImgjson(FaceInfo.detect(file.getBytes()));
+         json=FaceInfo.detect(file.getBytes());
+         bysj.setImgjson(json);
       }
       else
       {
-         return;
+         return bysj.getImgjson();
       }
       
-      bysj.setProseurl("www.maybe123.top:888/image/face/"+param);
+     bysj.setProseurl("http://www.maybe123.top:888/image/face/"+param);
+      //bysj.setProseurl("D:/image/face"+param);
       Thread th=new Thread(new ImageOutPut(file,"face/"+param));
       th.start();
       bysjImgurlBaseMapper.insertBysjImgurl(bysj);
+      return json;
    }
    //添加文字识别结果
-   public void addtextImg(MultipartFile file,String url)throws IOException{
+   public String addtextImg(MultipartFile file,String url)throws IOException{
       BysjImgurl bysj;
       //url+路径防止重复
+      String json;
       String param=url+file.getOriginalFilename();
       bysj=getJson(param);
       if(bysj==null){
          bysj=new BysjImgurl();
-      bysj.setImgjson(TextInfo.detect(file.getBytes()));
+         json=TextInfo.detect(file.getBytes());
+      bysj.setImgjson(json);
       }
       else
       {
-         return;
+         return bysj.getImgjson();
       }
-      bysj.setProseurl("www.maybe123.top:888/image/tex/"+param);
+
+   bysj.setProseurl("http://www.maybe123.top:888/image/tex/"+param);
+      //bysj.setProseurl("D:/image/tex"+param);
       Thread th=new Thread(new ImageOutPut(file,"tex/"+param));
       th.start();
       bysjImgurlBaseMapper.insertBysjImgurl(bysj);
+      return json;
    }
    //查询图片json
    public BysjImgurl getJson(String imgurl){
@@ -64,9 +73,11 @@ public class ImgService {
       return bysjImgurlBaseMapper.queryBysjImgurlLimit1(bysjImgurl);
    }
    //仅仅上传图片
-   public void upImage(MultipartFile file,String parm){
+   public String upImage(MultipartFile file,String parm){
       ImageOutPut im=new ImageOutPut(file,parm);
       Thread th=new Thread(im);
       th.start();
+      return "http://www.maybe123.top:888/image/"+parm;
+
    }
 }

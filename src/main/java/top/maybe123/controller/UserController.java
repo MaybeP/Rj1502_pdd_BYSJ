@@ -1,11 +1,16 @@
 package top.maybe123.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import top.maybe123.pojo.BysjAuditing;
 import top.maybe123.pojo.BysjUser;
+import top.maybe123.service.AuditingService;
 import top.maybe123.service.UserService;
 
 /*
@@ -16,6 +21,8 @@ import top.maybe123.service.UserService;
 public class UserController {
 	@Autowired
 	UserService userService;
+	@Autowired
+	AuditingService auditingService;
 	//验证登录
 	@RequestMapping("login.action")
 	public @ResponseBody BysjUser login(@Param("u_name")String name,@Param("u_password")String password){
@@ -33,9 +40,14 @@ public class UserController {
 	}
 	
 	//修改用户信息
-	@RequestMapping("updateUser.action")
-	public void updateUser(@Param("user") BysjUser bysjUser){
-		userService.updateUser(bysjUser);
+	@RequestMapping(value = "updateUser.action",method = RequestMethod.POST)
+	public @ResponseBody String updateUser(@Param("user") String user){
+
+		Gson gson=new Gson();
+		BysjUser User= gson.fromJson(user,BysjUser.class);
+		userService.updateUser(User);
+		return "成功！";
+
 	}
 	//注销
 	@RequestMapping("deleteUser.action")
@@ -43,9 +55,20 @@ public class UserController {
 		userService.deleteUser(bysjUser);
 	}
 	//注册用户
-	@RequestMapping("insertUser.action")
-	public void insertUser(@Param("user") BysjUser bysjUser){
-		userService.insertUser(bysjUser);
+	@RequestMapping(value = "insertUser.action",method = RequestMethod.POST)
+	public @ResponseBody String insertUser(@Param("user")String user){
+		Gson gson=new Gson();
+		BysjUser User= gson.fromJson(user,BysjUser.class);
+
+		//插入审核信息
+		BysjAuditing bysjAuditing=new BysjAuditing();
+		bysjAuditing.setAud_classify(3);
+		bysjAuditing.setAud_content(user);
+		bysjAuditing.setAud_result(1);
+		auditingService.insInfo(bysjAuditing);
+
+		userService.insertUser(User);
+		return "成功！";
 	}
 	//查询用户名是否存在
 	@RequestMapping("getUser.action")
