@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.maybe123.dao.base.BysjAuditingBaseMapper">
+
+
+    <insert id="insertBysjAuditing"  useGeneratedKeys="true" keyProperty="Id">
+        INSERT INTO `bysj_auditing`
+        (
+        <trim suffixOverrides=",">
+                    <if test="Id!=null">
+                        `Id`,
+                    </if>
+                    <if test="aud_classify!=null">
+                        `aud_classify`,
+                    </if>
+                    <if test="aud_content!=null">
+                        `aud_content`,
+                    </if>
+                    <if test="aud_result!=null">
+                        `aud_result`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="Id!=null">
+                    #{Id},
+                </if>
+                <if test="aud_classify!=null">
+                    #{aud_classify},
+                </if>
+                <if test="aud_content!=null">
+                    #{aud_content},
+                </if>
+                <if test="aud_result!=null">
+                    #{aud_result},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateBysjAuditing">
+        UPDATE `bysj_auditing`
+        SET
+        <trim suffixOverrides=",">
+            <if test="aud_classify != null">
+                `aud_classify` = #{aud_classify},
+            </if>
+            <if test="aud_content != null and aud_content!=''">
+                `aud_content` = #{aud_content},
+            </if>
+            <if test="aud_result != null">
+                `aud_result` = #{aud_result},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `Id` = #{Id} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `bysj_auditing`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.aud_classify != null">
+            `aud_classify` = #{set.aud_classify},
+        </if>
+        <if test="set.aud_content != null and set.aud_content!=''">
+            `aud_content` = #{set.aud_content},
+        </if>
+        <if test="set.aud_result != null">
+            `aud_result` = #{set.aud_result},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.IdList != null">
+                    `Id` in
+                    <foreach collection="where.IdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.IdSt !=null">
+                `Id` >= #{where.IdSt} and
+            </if>
+            <if test="where.IdEd!=null">
+                `Id` &lt;= #{where.IdEd} and
+            </if>
+                <if test="where.aud_classifyList != null">
+                    `aud_classify` in
+                    <foreach collection="where.aud_classifyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.aud_classifySt !=null">
+                `aud_classify` >= #{where.aud_classifySt} and
+            </if>
+            <if test="where.aud_classifyEd!=null">
+                `aud_classify` &lt;= #{where.aud_classifyEd} and
+            </if>
+                <if test="where.aud_contentList != null">
+                    `aud_content` in
+                    <foreach collection="where.aud_contentList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAud_content!=null and where.fuzzyAud_content.size()>0">
+                (
+                <foreach collection="where.fuzzyAud_content"  separator="or" item="item">
+                    `Aud_content` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAud_content!=null and where.rightFuzzyAud_content.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAud_content"  separator="or" item="item">
+                    `Aud_content` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.aud_resultList != null">
+                    `aud_result` in
+                    <foreach collection="where.aud_resultList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.aud_resultSt !=null">
+                `aud_result` >= #{where.aud_resultSt} and
+            </if>
+            <if test="where.aud_resultEd!=null">
+                `aud_result` &lt;= #{where.aud_resultEd} and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="top.maybe123.pojo.BysjAuditing" id="BysjAuditingMap">
+        <result property="Id" column="Id"/>
+        <result property="aud_classify" column="aud_classify"/>
+        <result property="aud_content" column="aud_content"/>
+        <result property="aud_result" column="aud_result"/>
+    </resultMap>
+
+
+    <select id="queryBysjAuditing" resultMap="BysjAuditingMap">
+        select
+        <include refid="baseResult"></include>
+        from  `bysj_auditing`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="Id != null">
+                `Id` = #{Id} and
+            </if>
+            <if test="aud_classify != null">
+                `aud_classify` = #{aud_classify} and
+            </if>
+            <if test="aud_content != null and aud_content!=''">
+                `aud_content` = #{aud_content} and
+            </if>
+            <if test="aud_result != null">
+                `aud_result` = #{aud_result} and
+            </if>
+            <if test = "(_parameter instanceof top.maybe123.pojo.BysjAuditing$QueryBuilder) == true">
+                <if test="IdList != null">
+                    `Id` in
+                    <foreach collection="IdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="IdSt !=null">
+                    `Id` >= #{IdSt} and
+                </if>
+                <if test="IdEd!=null">
+                    `Id` &lt;= #{IdEd} and
+                </if>
+                <if test="aud_classifyList != null">
+                    `aud_classify` in
+                    <foreach collection="aud_classifyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="aud_classifySt !=null">
+                    `aud_classify` >= #{aud_classifySt} and
+                </if>
+                <if test="aud_classifyEd!=null">
+                    `aud_classify` &lt;= #{aud_classifyEd} and
+                </if>
+                <if test="aud_contentList != null">
+                    `aud_content` in
+                    <foreach collection="aud_contentList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAud_content!=null and fuzzyAud_content.size()>0">
+                    (
+                    <foreach collection="fuzzyAud_content"  separator="or" item="item">
+                        `Aud_content` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAud_content!=null and rightFuzzyAud_content.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAud_content"  separator="or" item="item">
+                        `Aud_content` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="aud_resultList != null">
+                    `aud_result` in
+                    <foreach collection="aud_resultList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="aud_resultSt !=null">
+                    `aud_result` >= #{aud_resultSt} and
+                </if>
+                <if test="aud_resultEd!=null">
+                    `aud_result` &lt;= #{aud_resultEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryBysjAuditingLimit1" resultMap="BysjAuditingMap">
+        select
+        <include refid="baseResult"></include>
+        from  `bysj_auditing`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="Id != null">
+                `Id` = #{Id} and
+            </if>
+            <if test="aud_classify != null">
+                `aud_classify` = #{aud_classify} and
+            </if>
+            <if test="aud_content != null and aud_content!=''">
+                `aud_content` = #{aud_content} and
+            </if>
+            <if test="aud_result != null">
+                `aud_result` = #{aud_result} and
+            </if>
+            <if test = "(_parameter instanceof top.maybe123.pojo.BysjAuditing$QueryBuilder) == true">
+                    <if test="IdList != null">
+                        `Id` in
+                        <foreach collection="IdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="IdSt !=null">
+                    `Id` >= #{IdSt} and
+                </if>
+                <if test="IdEd!=null">
+                    `Id` &lt;= #{IdEd} and
+                </if>
+                    <if test="aud_classifyList != null">
+                        `aud_classify` in
+                        <foreach collection="aud_classifyList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="aud_classifySt !=null">
+                    `aud_classify` >= #{aud_classifySt} and
+                </if>
+                <if test="aud_classifyEd!=null">
+                    `aud_classify` &lt;= #{aud_classifyEd} and
+                </if>
+                    <if test="aud_contentList != null">
+                        `aud_content` in
+                        <foreach collection="aud_contentList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAud_content!=null and fuzzyAud_content.size()>0">
+                    (
+                    <foreach collection="fuzzyAud_content"  separator="or" item="item">
+                        `Aud_content` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAud_content!=null and rightFuzzyAud_content.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAud_content"  separator="or" item="item">
+                        `Aud_content` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="aud_resultList != null">
+                        `aud_result` in
+                        <foreach collection="aud_resultList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="aud_resultSt !=null">
+                    `aud_result` >= #{aud_resultSt} and
+                </if>
+                <if test="aud_resultEd!=null">
+                    `aud_result` &lt;= #{aud_resultEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `Id`,
+        `aud_classify`,
+        `aud_content`,
+        `aud_result`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof top.maybe123.pojo.BysjAuditing$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.Id==true">
+                        `Id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.aud_classify==true">
+                        `aud_classify`,
+                    </if>
+                    <if test="fetchFields.fetchFields.aud_content==true">
+                        `aud_content`,
+                    </if>
+                    <if test="fetchFields.fetchFields.aud_result==true">
+                        `aud_result`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.Id==null">
+                        `Id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.aud_classify==null">
+                        `aud_classify`,
+                    </if>
+                    <if test="fetchFields.excludeFields.aud_content==null">
+                        `aud_content`,
+                    </if>
+                    <if test="fetchFields.excludeFields.aud_result==null">
+                        `aud_result`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof top.maybe123.pojo.BysjAuditing$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>
