@@ -27,7 +27,7 @@ public class Accesstoken {
             // 官网获取的 API Key 更新为你注册的
             String clientId = "FaCbnhhc5vdfSia7yqMmqG12";
             // 官网获取的 Secret Key 更新为你注册的
-            String clientSecret = "BBsXLibHTbkx8UA0tLkahWYvmWGkIu1X";
+            String clientSecret = "FvwjrOZPG2Gyo69qEN3oiLYvakBBYrYM";
             return getAuth(clientId, clientSecret);
         }
 
